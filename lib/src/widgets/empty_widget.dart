@@ -8,12 +8,20 @@ class EmptyPage extends StatefulWidget {
   final String title;
   final String iconPath;
   final Widget childWidget;
+  final double? titleSize;
+  final double? imageWidth;
+  final double? imageHeight;
+  final double? imageTitlePadding;
 
   const EmptyPage(
       {Key? key,
       required this.showEmpty,
       required this.title,
       required this.iconPath,
+      this.titleSize,
+      this.imageWidth,
+      this.imageHeight,
+      this.imageTitlePadding,
       required this.childWidget})
       : super(key: key);
 
@@ -30,10 +38,10 @@ class _EmptyPageState extends State<EmptyPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                  margin: EdgeInsets.only(bottom: 44.h),
+                  margin: EdgeInsets.only(bottom: widget.imageTitlePadding??44.h),
                   child: Container(
-                    width: 476.w,
-                    height: 320.h,
+                    width: widget.imageWidth??476.w,
+                    height: widget.imageHeight??320.h,
                     decoration: BoxDecoration(
                         image: DecorationImage(
                       fit: BoxFit.cover,
@@ -43,7 +51,7 @@ class _EmptyPageState extends State<EmptyPage> {
               Text(
                 widget.title,
                 style: TextStyle(
-                  fontSize: 24.sp,
+                  fontSize: widget.titleSize??24.sp,
                   color: Colors.black,
                 ),
               )
