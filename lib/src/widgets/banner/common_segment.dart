@@ -8,19 +8,19 @@ class TitleModel {
 }
 
 class CommonSegment extends Container{
-  List<TitleModel> titleList;
-  double? fontSize;
-  Color? normalColor;
-  Color? selectColor;
-  Color? normalBackColor;
-  Color? selectBackColor;
-  double? itemWidth;
-  double? itemHeight;
-  double? height;
-  double? paddingLeft;
-  double? paddingRight;
-  double? radius;
-  Function(dynamic)? callBack;
+  List<TitleModel> titleList; //选项卡集合
+  double? fontSize; //字体大小
+  Color? normalColor; //默认字体颜色
+  Color? selectColor; //选中字体颜色
+  Color? normalBackColor; //默认背景颜色
+  Color? selectBackColor; //选中背景颜色
+  double? itemWidth; //选项卡宽度
+  double? itemHeight; //选项卡长度
+  double? height; //组件高度
+  double? paddingLeft; //
+  double? paddingRight; //
+  double? radius; //选项卡圆角
+  Function(dynamic)? callBack; //选项卡点击回调
   CommonSegment({
     Key? key,
     this.height,

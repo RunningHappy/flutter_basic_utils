@@ -9,6 +9,7 @@ export 'package:image_picker/image_picker.dart';
 export 'package:path_provider/path_provider.dart';
 export 'package:flutter_image_compress/flutter_image_compress.dart';
 export 'package:cached_network_image/cached_network_image.dart';
+export 'package:flutter_swiper_plus/flutter_swiper_plus.dart';
 
 
 /// style
@@ -105,11 +106,11 @@ export 'src/widgets/form/textfield_search.dart';
 export 'src/widgets/form/textfield_star_view.dart'; // 样式：*文本：输入框（视图）
 export 'src/widgets/form/textfield_star_view_item.dart'; // 样式：*文本：输入框（视图）
 // 弹出框
-export 'src/widgets/pop_alert/pop_center_alert.dart';
-export 'src/widgets/pop_alert/pop_bottom_alert.dart';
-export 'src/widgets/pop_alert/pop_bottom_sheet_alert.dart';
+export 'src/widgets/pop_alert/pop_center_frame_alert.dart';
+export 'src/widgets/pop_alert/pop_bottom_show_big_sheet.dart';
+export 'src/widgets/pop_alert/pop_bottom_frame_sheet.dart';
 export 'src/widgets/pop_alert/pop_my_image_action_alert.dart';
-export 'src/widgets/pop_alert/pop_my_confirm_alert.dart';
+export 'src/widgets/pop_alert/pop_confirm_alert.dart';
 // text
 export 'src/widgets/text/select_text.dart';
 //switchCell
@@ -146,7 +147,10 @@ export 'src/widgets/pop_menu/pop_menu_alert.dart';
 export 'src/widgets/calender/show_calendar_bottom_sheet.dart';
 //上拉抽屉效果
 export 'src/widgets/uppanel/sliding_up_panel.dart';
+//中间凸起bottombar
+export 'src/widgets/uppanel/center_floating_bottom_bar.dart';
+//图片浏览与下载
+export 'src/widgets/uppanel/common_see_image_view.dart';
 //banner
 export 'src/widgets/banner/common_banner.dart';
 export 'src/widgets/banner/common_segment.dart';
-

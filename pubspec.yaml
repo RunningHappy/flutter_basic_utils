@@ -41,6 +41,11 @@ dependencies:
   sliding_up_panel: ^2.0.0+1
   # 轮播
   flutter_swiper_plus: ^2.0.4
+<<<<<<< HEAD
+=======
+  #图片放大查看
+  photo_view: ^0.13.0
+>>>>>>> 42b4df2 ('新增banner、底部悬停抽屉、底部凸出bottombar、图片浏览器')
 
 
 dev_dependencies:

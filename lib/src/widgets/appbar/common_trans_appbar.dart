@@ -29,32 +29,29 @@ CommonTansAppBar(
         ),
       ),
     ),
-    leading: Offstage(
-      offstage: showBack! ? false : true,
-      child: GestureDetector(
-        onTap: (){
-          if(clickBack != null){
-            clickBack();
-          }
-        },
-        child: Container(
-          margin: EdgeInsets.only(left: 15.w,top: 8.w,bottom: 8.w),
-          width: 32.w,
-          height: 32.w,
-          padding: EdgeInsets.all(4.w),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6.w),
-            color: backIconColor??const Color(0x20FFFFFF)
-          ),
-          child: Image.asset(
-            backIconPath??'',
-            width: 24.w,
-            height: 24.w,
-            color: opacity > 0.4 ? Color.fromRGBO(0, 0, 0, opacity) : Colors.white,
-          ),
+    leading: showBack! ? GestureDetector(
+      onTap: (){
+        if(clickBack != null){
+          clickBack();
+        }
+      },
+      child: Container(
+        margin: EdgeInsets.only(left: 15.w,top: 8.w,bottom: 8.w),
+        width: 32.w,
+        height: 32.w,
+        padding: EdgeInsets.all(4.w),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6.w),
+          color: backIconColor??const Color(0x20FFFFFF)
+        ),
+        child: Image.asset(
+          backIconPath??'',
+          width: 24.w,
+          height: 24.w,
+          color: opacity > 0.4 ? Color.fromRGBO(0, 0, 0, opacity) : Colors.white,
         ),
       ),
-    ),
+    ) : Container(),
     actions: actions??[],
   );
 }
