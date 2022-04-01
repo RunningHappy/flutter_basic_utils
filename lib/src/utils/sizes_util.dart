@@ -2,6 +2,9 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
+/// 盒子
+///
 class Sizes extends SizedBox {
   const Sizes({Key? key}) : super(key: key);
 

@@ -2,7 +2,9 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// +/- 数量
+///
 class StepperNumber extends StatefulWidget {
   final int num;
   final bool canInput;

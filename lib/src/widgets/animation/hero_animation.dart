@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// hero 转场动画
+///
 class HeroAnimation extends StatelessWidget {
   const HeroAnimation({Key? key}) : super(key: key);
 

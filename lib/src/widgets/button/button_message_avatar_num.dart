@@ -39,7 +39,7 @@ class MessageAvatarNumButton extends StatelessWidget {
                   width: double.infinity,
                   height: height ?? 87.w,
                   fit: BoxFit.cover,
-                  placeHodlerWidget: Image.asset(
+                  placeHolderWidget: Image.asset(
                     placeholder,
                     width: height ?? 87.w,
                     height: height ?? 87.w,

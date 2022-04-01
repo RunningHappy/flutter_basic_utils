@@ -4,7 +4,9 @@ import 'package:app_assembly/src/widgets/pop_menu/pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// 弹出菜单
+///
+/// 弹出气泡菜单，仿微信气泡弹出框
+///
 class PopupMenuAlert extends StatefulWidget {
   final double? containerWidth;
   final Widget child;
@@ -69,8 +71,7 @@ class _PopupMenuAlertState extends State<PopupMenuAlert> {
                     border: Border(
                       // 四个值 top right bottom left
                       bottom: BorderSide(
-                          color: const Color(0x10000000),
-                          width: 20.w),
+                          color: const Color(0x10000000), width: 20.w),
                       right: BorderSide(color: Colors.transparent, width: 20.w),
                       left: BorderSide(color: Colors.transparent, width: 20.w),
                     ),
@@ -117,8 +118,7 @@ class _PopupMenuAlertState extends State<PopupMenuAlert> {
                       Text(
                         widget.titles[index],
                         style: TextStyle(
-                            fontSize: 28.sp,
-                            color: const Color(0xFF41485D)),
+                            fontSize: 28.sp, color: const Color(0xFF41485D)),
                       )
                     ],
                   ),
@@ -137,8 +137,7 @@ class _PopupMenuAlertState extends State<PopupMenuAlert> {
                     border: Border(
                       // 四个值 top right bottom left
                       top: BorderSide(
-                          color: const Color(0x10000000),
-                          width: 20.w),
+                          color: const Color(0x10000000), width: 20.w),
                       right: BorderSide(color: Colors.transparent, width: 20.w),
                       left: BorderSide(color: Colors.transparent, width: 20.w),
                     ),

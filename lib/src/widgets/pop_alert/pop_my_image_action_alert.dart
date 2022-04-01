@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 底部弹出对话框
+///
 class MyActionSheet extends StatelessWidget {
   final List<String>? buttonItems;
   final Function? onTap;
@@ -15,7 +17,7 @@ class MyActionSheet extends StatelessWidget {
   }
 
   /// 显示对话框
-  static showMyActionSheet(BuildContext context, List<String> buttonItems,
+  static showImageActionSheet(BuildContext context, List<String> buttonItems,
       {Function? onTap}) {
     showModalBottomSheet(
         backgroundColor: Colors.white,

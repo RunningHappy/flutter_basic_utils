@@ -1,6 +1,9 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
+///
+/// 本地数据存储
+///
 class LocalStorage {
   /// 获取存取数据
   static Future get(String key) async {

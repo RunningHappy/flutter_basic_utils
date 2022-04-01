@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 使用AnimatedWidget循环的进行放大和缩小，
 /// 现在考虑一下如何再添加一个在透明和不透明之间循环的动画
+///
 class InOutLogo extends StatefulWidget {
   final Widget? child;
   const InOutLogo({Key? key, this.child}) : super(key: key);

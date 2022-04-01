@@ -1,7 +1,9 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
+///
 /// "孔雀开屏"转场动画
+///
 class OpenNextAnimation {
   OpenNextAnimation();
 

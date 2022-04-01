@@ -1,5 +1,8 @@
 import 'package:flutter/services.dart';
 
+///
+/// 小数的 formatter
+///
 class PrecisionLimitFormatter extends TextInputFormatter {
   final int _scale;
 

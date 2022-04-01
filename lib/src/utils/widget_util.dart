@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/widgets.dart';
 
+///
 /// 监听Widget渲染状态，获取Widget宽高，在屏幕上的坐标，获取网络/本地图片尺寸.
+///
 class WidgetUtil {
   bool _hasMeasured = false;
   double _width = 0;
@@ -39,8 +41,7 @@ class WidgetUtil {
     });
   }
 
-  ///get Widget Bounds (width, height, left, top, right, bottom and so on).Widgets must be rendered completely.
-  ///获取widget Rect
+  /// 获取widget Rect
   static Rect getWidgetBounds(BuildContext context) {
     RenderBox? box = getRenderBox(context);
     return box?.semanticBounds ?? Rect.zero;
@@ -55,8 +56,7 @@ class WidgetUtil {
     return box;
   }
 
-  ///Get the coordinates of the widget on the screen.Widgets must be rendered completely.
-  ///获取widget在屏幕上的坐标,widget必须渲染完成
+  /// 获取widget在屏幕上的坐标,widget必须渲染完成
   static Offset getWidgetLocalToGlobal(BuildContext context) {
     RenderBox? box = getRenderBox(context);
     return box == null ? Offset.zero : box.localToGlobal(Offset.zero);

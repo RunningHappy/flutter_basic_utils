@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
+///
+/// 安卓返回到桌面
+///
 class AndroidBackTop {
   /// 初始化通信管道 - 设置退出到手机桌面
   static const String _channel = "com.p595263720.zit/desktop";

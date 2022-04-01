@@ -3,7 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 弹出底部列表 sheet
+///
 class PopBottomListSheet extends Dialog {
   const PopBottomListSheet({
     Key? key,
@@ -14,8 +16,8 @@ class PopBottomListSheet extends Dialog {
     Navigator.of(context).pop();
   }
 
-  // 显示对话框
-  static showBottomSheet(BuildContext context,
+  /// 显示对话框
+  static showBottomListSheet(BuildContext context,
       {int? index,
       required List pickerChildren,
       required Function sureCallBack}) {

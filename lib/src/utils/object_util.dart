@@ -1,22 +1,23 @@
+///
 /// 判断对象是否为空(String List Map),判断两个List是否相等.
-/// Object Util.
+///
 class ObjectUtil {
-  /// Returns true if the string is null or 0-length.
+  /// 是否是空字符串
   static bool isEmptyString(String? str) {
     return str == null || str.isEmpty;
   }
 
-  /// Returns true if the list is null or 0-length.
+  /// 是否是空数组
   static bool isEmptyList(Iterable? list) {
     return list == null || list.isEmpty;
   }
 
-  /// Returns true if there is no key/value pair in the map.
+  /// 是否是空字典
   static bool isEmptyMap(Map? map) {
     return map == null || map.isEmpty;
   }
 
-  /// Returns true  String or List or Map is empty.
+  /// 是否是空
   static bool isEmpty(Object? object) {
     if (object == null) return true;
     if (object is String && object.isEmpty) {
@@ -29,12 +30,12 @@ class ObjectUtil {
     return false;
   }
 
-  /// Returns true String or List or Map is not empty.
+  /// 是否不是空
   static bool isNotEmpty(Object? object) {
     return !isEmpty(object);
   }
 
-  /// Returns true Two List Is Equal.
+  /// 两个数组是否一样
   static bool twoListIsEqual(List? listA, List? listB) {
     if (listA == listB) return true;
     if (listA == null || listB == null) return false;
@@ -48,7 +49,7 @@ class ObjectUtil {
     return true;
   }
 
-  /// get length.
+  /// 获取长度
   static int getLength(Object? value) {
     if (value == null) return 0;
     if (value is String) {

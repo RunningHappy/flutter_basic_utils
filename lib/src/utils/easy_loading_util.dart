@@ -1,5 +1,8 @@
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
+///
+/// loading 加载
+///
 class EasyLoadingHelper {
   static showLoading(String? msg) {
     EasyLoading.show(

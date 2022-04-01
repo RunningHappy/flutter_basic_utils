@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 放大缩小循环的动画显示logo
 /// addStatusListener()在开始或结束时反转动画，产生了循环效果
+///
 class ZoomInAndOutLogo extends StatefulWidget {
   final Widget? child;
   const ZoomInAndOutLogo({Key? key, this.child}) : super(key: key);

@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 含成功/失败的图片 toast
+///
 class SuccessToast {
   static OverlayEntry? overlayEntry;
 

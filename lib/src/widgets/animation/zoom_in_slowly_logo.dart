@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 逐渐放大的动画显示logo
+///
 class ZoomInSlowlyLogo extends StatefulWidget {
   final Widget? child;
   const ZoomInSlowlyLogo({Key? key, this.child}) : super(key: key);

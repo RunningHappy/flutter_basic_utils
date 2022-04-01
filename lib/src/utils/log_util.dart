@@ -1,6 +1,8 @@
 import 'package:flutter/services.dart';
 
+///
 /// 打印类，目前只写了 android channel
+/// 
 class LogUtil {
   static const String _tag = "LogUtils";
   static const _perform = MethodChannel("com.p595263720.zit/log");

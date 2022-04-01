@@ -6,20 +6,22 @@ enum MoneyUnit {
   yuanZh, // 6.00元
   dollar, // $6.00
 }
+
 enum MoneyFormat {
   normal, // 保留两位小数(6.00元)
   endInteger, // 去掉末尾'0'(6.00元 -> 6元, 6.60元 -> 6.6元)
   yuanInteger, // 整元(6.00元 -> 6元)
 }
 
-/// Money Util.
+///
+/// 金额格式化
+///
 class MoneyUtil {
   static const String yuan = '¥';
   static const String yuanZH = '元';
   static const String dollar = '\$';
 
-  /// fen to yuan, format output.
-  /// 分 转 元, format格式输出.
+  /// 分 转 元, format 格式输出.
   static String changeF2Y(int amount,
       {MoneyFormat format = MoneyFormat.normal}) {
     String moneyTxt;
@@ -46,7 +48,6 @@ class MoneyUtil {
     return moneyTxt;
   }
 
-  /// fen str to yuan, format & unit  output.
   /// 分字符串 转 元, format 与 unit 格式 输出.
   static String changeFStr2YWithUnit(String amountStr,
       {MoneyFormat format = MoneyFormat.normal,
@@ -55,7 +56,6 @@ class MoneyUtil {
     return changeF2YWithUnit(amount, format: format, unit: unit);
   }
 
-  /// fen to yuan, format & unit  output.
   /// 分 转 元, format 与 unit 格式 输出.
   static String changeF2YWithUnit(int amount,
       {MoneyFormat format = MoneyFormat.normal,
@@ -63,7 +63,6 @@ class MoneyUtil {
     return withUnit(changeF2Y(amount, format: format), unit);
   }
 
-  /// yuan, format & unit  output.(yuan is int,double,str).
   /// 元, format 与 unit 格式 输出.
   static String changeYWithUnit(Object yuan, MoneyUnit unit,
       {MoneyFormat? format}) {
@@ -75,13 +74,11 @@ class MoneyUtil {
     return withUnit(yuanTxt, unit);
   }
 
-  /// yuan to fen.
-  /// 元 转 分，
+  /// 元 转 分
   static int changeY2F(Object yuan) {
     return NumUtil.multiplyDecStr(yuan.toString(), '100').toInt();
   }
 
-  /// with unit.
   /// 拼接单位.
   static String withUnit(String moneyTxt, MoneyUnit unit) {
     switch (unit) {

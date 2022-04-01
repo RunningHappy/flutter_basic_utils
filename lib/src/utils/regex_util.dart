@@ -1,6 +1,5 @@
-/// 正则验证手机号，身份证，邮箱等等
-/// id card province dict.
-List<String> ID_CARD_PROVINCE_DICT = [
+
+List<String> idCardProvinceDict = [
   '11=北京',
   '12=天津',
   '13=河北',
@@ -39,10 +38,12 @@ List<String> ID_CARD_PROVINCE_DICT = [
   '91=国外',
 ];
 
-/// Regex Util.
+///
+/// 正则验证手机号，身份证，邮箱等等
+///
 class RegexUtil {
   /// Regex of simple mobile.
-  static final String regexMobileSimple = '^[1]\\d{10}\$';
+  static const String regexMobileSimple = '^[1]\\d{10}\$';
 
   /// Regex of exact mobile.
   ///  <p>china mobile: 134(0-8), 135, 136, 137, 138, 139, 147, 150, 151, 152, 157, 158, 159, 165, 172, 178, 182, 183, 184, 187, 188, 195, 198</p>
@@ -50,64 +51,61 @@ class RegexUtil {
   ///  <p>china telecom: 133, 153, 162, 173, 177, 180, 181, 189, 199, 191</p>
   ///  <p>global star: 1349</p>
   ///  <p>virtual operator: 170</p>
-  static final String regexMobileExact =
+  static const String regexMobileExact =
       '^((13[0-9])|(14[57])|(15[0-35-9])|(16[2567])|(17[01235-8])|(18[0-9])|(19[1589]))\\d{8}\$';
 
   /// Regex of telephone number.
-  static final String regexTel = '^0\\d{2,3}[- ]?\\d{7,8}';
+  static const String regexTel = '^0\\d{2,3}[- ]?\\d{7,8}';
 
   /// Regex of id card number which length is 15.
-  static final String regexIdCard15 =
+  static const String regexIdCard15 =
       '^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}\$';
 
   /// Regex of id card number which length is 18.
-  static final String regexIdCard18 =
+  static const String regexIdCard18 =
       '^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}([0-9Xx])\$';
 
   /// Regex of email.
-  static final String regexEmail =
+  static const String regexEmail =
       '^\\w+([-+.]\\w+)*@\\w+([-.]\\w+)*\\.\\w+([-.]\\w+)*\$';
 
   /// Regex of url.
-  static final String regexUrl = '[a-zA-Z]+://[^\\s]*';
+  static const String regexUrl = '[a-zA-Z]+://[^\\s]*';
 
   /// Regex of Chinese character.
-  static final String regexZh = '[\\u4e00-\\u9fa5]';
+  static const String regexZh = '[\\u4e00-\\u9fa5]';
 
   /// Regex of date which pattern is 'yyyy-MM-dd'.
-  static final String regexDate =
+  static const String regexDate =
       '^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)\$';
 
   /// Regex of ip address.
-  static final String regexIp =
+  static const String regexIp =
       '((2[0-4]\\d|25[0-5]|[01]?\\d\\d?)\\.){3}(2[0-4]\\d|25[0-5]|[01]?\\d\\d?)';
 
-  /// must contain letters and numbers, 6 ~ 18.
   /// 必须包含字母和数字, 6~18.
   static const String regexUsername =
       '^(?![0-9]+\$)(?![a-zA-Z]+\$)[0-9A-Za-z]{6,18}\$';
 
-  /// must contain letters and numbers, can contain special characters 6 ~ 18.
   /// 必须包含字母和数字,可包含特殊字符 6~18.
   static const String regexUsername2 =
       '^(?![0-9]+\$)(?![a-zA-Z]+\$)[0-9A-Za-z\\W]{6,18}\$';
 
-  /// must contain letters and numbers and special characters, 6 ~ 18.
   /// 必须包含字母和数字和殊字符, 6~18.
   static const String regexUsername3 =
       '^(?![0-9]+\$)(?![a-zA-Z]+\$)(?![0-9a-zA-Z]+\$)(?![0-9\\W]+\$)(?![a-zA-Z\\W]+\$)[0-9A-Za-z\\W]{6,18}\$';
 
   /// Regex of QQ number.
-  static final String regexQQ = '[1-9][0-9]{4,}';
+  static const String regexQQ = '[1-9][0-9]{4,}';
 
   /// Regex of postal code in China.
-  static final String regexChinaPostalCode = "[1-9]\\d{5}(?!\\d)";
+  static const String regexChinaPostalCode = "[1-9]\\d{5}(?!\\d)";
 
   /// Regex of Passport.
-  static final String regexPassport =
+  static const String regexPassport =
       r'(^[EeKkGgDdSsPpHh]\d{8}$)|(^(([Ee][a-fA-F])|([DdSsPp][Ee])|([Kk][Jj])|([Mm][Aa])|(1[45]))\d{7}$)';
 
-  static final Map<String, String> cityMap = Map();
+  static final Map<String, String> cityMap = {};
 
   ///Return whether input matches regex of simple mobile.
   static bool isMobileSimple(String input) {
@@ -163,7 +161,7 @@ class RegexUtil {
         '2'
       ];
       if (cityMap.isEmpty) {
-        List<String> list = ID_CARD_PROVINCE_DICT;
+        List<String> list = idCardProvinceDict;
         List<MapEntry<String, String>> mapEntryList = [];
         for (int i = 0, length = list.length; i < length; i++) {
           List<String> tokens = list[i].trim().split('=');

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 步骤条
+///
 class StepBar extends StatefulWidget {
   final List<Map> list;
   final Color iconColor;
@@ -89,10 +91,10 @@ class StepBarState extends State<StepBar> {
             child: _widgetDit(currentIndex),
           ),
           currentIndex < _list.length - 1
-              ? Container(
-                  child: _widgetLine(),
-                )
-              : Container()
+            ? Container(
+                child: _widgetLine(),
+              )
+            : Container()
         ],
       ),
     );

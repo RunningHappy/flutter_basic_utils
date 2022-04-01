@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+///
 /// 获取屏幕上获取小部件的绝对坐标
+///
 Rect globalPaintBounds(GlobalKey key) {
   final renderObject = key.currentContext?.findRenderObject();
   var translation = renderObject?.getTransformTo(null).getTranslation();
@@ -13,7 +15,9 @@ Rect globalPaintBounds(GlobalKey key) {
   }
 }
 
+///
 /// 解决长数字、字母全部显示省略问题
+///
 String breakWord(String word) {
   if (word.isEmpty) {
     return word;
@@ -26,38 +30,50 @@ String breakWord(String word) {
   return breakWord;
 }
 
+///
 /// 请求焦点  隐藏键盘
+///
 void hideKeyboard(BuildContext context) {
   FocusScope.of(context).requestFocus(FocusNode());
 }
 
+///
 /// 清空输入框
+///
 void clearInput(TextEditingController controller) {
   // 保证在组件build的第一帧时才去触发取消清空内容
   WidgetsBinding.instance!.addPostFrameCallback((_) => controller.clear());
 }
 
+///
 /// 返回上一级
+///
 void back(BuildContext context) {
   hideKeyboard(context);
   Navigator.pop(context);
 }
 
+///
 /// 回到顶部
+///
 void toTop(ScrollController scrollController) {
   Future.delayed(const Duration(milliseconds: 20), () {
     scrollController.jumpTo(scrollController.position.minScrollExtent);
   });
 }
 
+///
 /// 回到底部
+///
 void toBottom(ScrollController scrollController) {
   Future.delayed(const Duration(milliseconds: 20), () {
     scrollController.jumpTo(scrollController.position.maxScrollExtent);
   });
 }
 
+///
 /// 请求权限
+///
 Future<bool> requestPermissions(List<Permission>? permissionList) async {
   Map<Permission, PermissionStatus>? permissions =
       await permissionList!.request();
@@ -66,6 +82,8 @@ Future<bool> requestPermissions(List<Permission>? permissionList) async {
   }).toList();
   return !results.contains(false);
 }
+
+
 
 class NumLengthInputFormatter extends TextInputFormatter {
   late int decimalLength;

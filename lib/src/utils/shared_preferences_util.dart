@@ -2,7 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
+///
 /// 用来做shared_preferences的存储
+///
 class SpUtil {
   static SpUtil? _instance;
 

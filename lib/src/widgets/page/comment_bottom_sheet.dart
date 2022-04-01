@@ -2,19 +2,21 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 底部弹出评论sheet（包含头像、昵称、内容、时间）
+///
 class CommentBottomSheet extends Dialog {
   const CommentBottomSheet({
     Key? key,
   }) : super(key: key);
 
-  // 取消对话框
+  /// 取消对话框
   static disMissDialog(BuildContext context) {
     Navigator.of(context).pop();
   }
 
-  // 显示对话框
-  static showMyConfirmDialog(BuildContext context,
+  /// 显示对话框
+  static showCommentDialog(BuildContext context,
       {Function? onTap, String? startTime, String? endTime}) {
     showDialog(
         context: context,

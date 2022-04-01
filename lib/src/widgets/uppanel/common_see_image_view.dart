@@ -58,8 +58,8 @@ class _CommonImageViewState extends State<CommonImageView> {
           title: Text(
             currentIndex.toString() + '/' + widget.imageList.length.toString(),
             style: TextStyle(
-                fontSize: 15.sp,
-                color: Colors.white
+              fontSize: 15.sp,
+              color: Colors.white
             ),
           ),
           actions: [
@@ -73,42 +73,42 @@ class _CommonImageViewState extends State<CommonImageView> {
         body: Stack(
           children: [
             PhotoViewGallery.builder(
-                scrollPhysics: const BouncingScrollPhysics(),
-                builder: (BuildContext context, int index) {
-                  return widget.imageList[index].contains('http') || widget.imageList[index].contains('https') ? PhotoViewGalleryPageOptions(
-                      heroAttributes: PhotoViewHeroAttributes(tag: index),
-                      imageProvider: NetworkImage(
-                        widget.imageList[index],
-                      )
-                  ) : PhotoViewGalleryPageOptions(
-                    heroAttributes: PhotoViewHeroAttributes(tag: index),
-                    imageProvider: AssetImage(
-                      widget.imageList[index],
-                    ),
-                  );
-                },
-                itemCount: widget.imageList.length,
-                backgroundDecoration: const BoxDecoration(color: Colors.transparent),
-                pageController: PageController(initialPage: widget.currentIndex),
-                onPageChanged: (index){
-                  setState(() {
-                    currentIndex = index + 1;
-                  });
-                }
+              scrollPhysics: const BouncingScrollPhysics(),
+              builder: (BuildContext context, int index) {
+                return widget.imageList[index].contains('http') || widget.imageList[index].contains('https') ? PhotoViewGalleryPageOptions(
+                  heroAttributes: PhotoViewHeroAttributes(tag: index),
+                  imageProvider: NetworkImage(
+                    widget.imageList[index],
+                  )
+                ) : PhotoViewGalleryPageOptions(
+                  heroAttributes: PhotoViewHeroAttributes(tag: index),
+                  imageProvider: AssetImage(
+                    widget.imageList[index],
+                  ),
+                );
+              },
+              itemCount: widget.imageList.length,
+              backgroundDecoration: const BoxDecoration(color: Colors.transparent),
+              pageController: PageController(initialPage: widget.currentIndex),
+              onPageChanged: (index){
+                setState(() {
+                  currentIndex = index + 1;
+                });
+              }
             ),
             Positioned(
-                right: 10.w,
-                bottom: 10.w,
-                child: GestureDetector(
-                  onTap: (){
-                    widget.downLoad(currentIndex - 1);
-                  },
-                  child: Icon(
-                    Icons.download_sharp,
-                    color: Colors.white,
-                    size: 28.sp,
-                  ),
-                )
+              right: 10.w,
+              bottom: 10.w,
+              child: GestureDetector(
+                onTap: (){
+                  widget.downLoad(currentIndex - 1);
+                },
+                child: Icon(
+                  Icons.download_sharp,
+                  color: Colors.white,
+                  size: 28.sp,
+                ),
+              )
             )
           ],
         )
@@ -121,16 +121,16 @@ class CommonSeeImageView {
 
   /// 预览一组图片
   static Future<T?> preview<T>(
-      BuildContext context, {
-        int initialIndex = 0,
-        required List<String> images,
-        required Function(int) downLoad,
-      }) {
+    BuildContext context, {
+      int initialIndex = 0,
+      required List<String> images,
+      required Function(int) downLoad,
+    }) {
     return Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (BuildContext context) => CommonImageView(imageList: images,currentIndex: initialIndex,downLoad: downLoad,)
-        )
+      context,
+      MaterialPageRoute(
+          builder: (BuildContext context) => CommonImageView(imageList: images,currentIndex: initialIndex,downLoad: downLoad,)
+      )
     );
   }
 }

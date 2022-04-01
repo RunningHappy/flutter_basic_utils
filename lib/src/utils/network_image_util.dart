@@ -1,14 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-/// 网络图片加载类,作为异常处理
+///
+/// 网络图片加载类，作为异常处理
+///
 class MyNetWorkImage extends StatefulWidget {
   final String url;
   final double? width;
   final double? height;
   final String? defImagePath;
   final BoxFit? fit;
-  final Widget? placeHodlerWidget;
+  final Widget? placeHolderWidget;
 
   const MyNetWorkImage(
       {Key? key,
@@ -17,7 +19,7 @@ class MyNetWorkImage extends StatefulWidget {
       this.height,
       this.defImagePath,
       this.fit,
-      this.placeHodlerWidget})
+      this.placeHolderWidget})
       : super(key: key);
 
   @override
@@ -57,9 +59,9 @@ class _MyNetWorkImageState extends State<MyNetWorkImage> {
 
   void initImage() {
     if ((widget.url == null || widget.url == '') &&
-        widget.placeHodlerWidget != null) {
+        widget.placeHolderWidget != null) {
       setState(() {
-        _image = widget.placeHodlerWidget as Image?;
+        _image = widget.placeHolderWidget as Image?;
       });
       return;
     }
@@ -83,8 +85,8 @@ class _MyNetWorkImageState extends State<MyNetWorkImage> {
         onError: (dynamic exception, StackTrace? stackTrace) {
       // todo 加载异常显示默认图片
       setState(() {
-        if (widget.placeHodlerWidget != null) {
-          _image = widget.placeHodlerWidget as Image?;
+        if (widget.placeHolderWidget != null) {
+          _image = widget.placeHolderWidget as Image?;
         }
       });
     });

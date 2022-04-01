@@ -2,6 +2,9 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+///
+/// 可左右滑动的工具类
+///
 class PageViewScrollUtils {
   final PageController pageController;
   final TabController tabController;

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
+///
+/// 常量表
+///
 class SystemFontSize {
   static const double avatar = 56;
   static const double iconNormal = 24;
@@ -10,6 +13,9 @@ class SystemFontSize {
   static const double small = 12;
 }
 
+///
+/// 样式表
+///
 class StandardTextStyle {
   static const TextStyle big = TextStyle(
     fontWeight: FontWeight.w600,
@@ -51,6 +57,9 @@ class StandardTextStyle {
   );
 }
 
+///
+/// 颜色表
+///
 class ColorPlate {
   // 配色
   static const Color orange = Color(0xffffc459);

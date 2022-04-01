@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
+///
 /// 跑马灯(横向)
+///
 class MarqueeHorizontal extends StatefulWidget {
   final Duration? duration; // 轮播时间
   final double? stepOffset; // 偏移量

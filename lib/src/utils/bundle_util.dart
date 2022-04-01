@@ -1,3 +1,6 @@
+///
+/// 页面跳转时，传值的
+///
 class Bundle {
   final Map<String, dynamic> _map = {};
 

@@ -2,7 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// 底部弹窗框架
+///
+/// 底部弹窗框架，可自定义内容容器
+///
 class PopBottomFrameSheet extends Dialog {
   final Widget childWidget;
 
@@ -15,7 +17,7 @@ class PopBottomFrameSheet extends Dialog {
   }
 
   /// 显示对话框
-  static showMyConfirmDialog(BuildContext context,
+  static showBottomFrameDialog(BuildContext context,
       {required Widget childWidget}) {
     showModalBottomSheet(
         context: context,

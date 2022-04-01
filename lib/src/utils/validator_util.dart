@@ -1,3 +1,6 @@
+///
+/// 正则验证
+///
 class Validator {
   /// 验证银行卡号
   static bool isCardNumber(String input) {

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 星级评分组件（多星级）
+///
 class RateStar extends StatefulWidget {
   final int maxStarCount;
   final String normalIcon;

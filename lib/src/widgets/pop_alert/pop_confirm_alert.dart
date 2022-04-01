@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 确认对话框,可实现一个按钮，也可以实现两个按钮
+///
 class MyConfirmDialog extends Dialog {
   final List<String> buttonItems;
   final String? title;

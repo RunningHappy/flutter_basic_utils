@@ -9,6 +9,9 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+///
+/// 获取相册/拍照权限，选择图片并压缩图片
+///
 class ImageUtil {
   static Function? _imageInfoCallback;
   static BuildContext? _mContext;
@@ -17,12 +20,12 @@ class ImageUtil {
     _imageInfoCallback = callback;
     _mContext = context;
     hideKeyboard(_mContext!);
-    MyActionSheet.showMyActionSheet(context, ["拍照上传", "相册选择"], onTap: (index) {
+    MyActionSheet.showImageActionSheet(context, ["拍照上传", "相册选择"], onTap: (index) {
       _requestPermission(context, index);
     });
   }
 
-  // 申请权限
+  /// 申请权限
   static Future<void> _requestPermission(
       BuildContext context, int index) async {
     MyActionSheet.disMissActionSheet(_mContext!);
@@ -48,7 +51,7 @@ class ImageUtil {
     }
   }
 
-  // 图片压缩
+  /// 图片压缩
   static Future<File> imageCompressAndGetFile(File file) async {
     // 500KB 作为压缩标准
     if (file.lengthSync() < 0.5 * 1024 * 1024) {
@@ -77,7 +80,7 @@ class ImageUtil {
     return result;
   }
 
-  // 图片转Base64
+  /// 图片转Base64
   static Future image2Base64(String path) async {
     File file = File(path);
     List<int> imageBytes = await file.readAsBytes();

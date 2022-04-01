@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 数字自动增加动画
+///
 class AnimationText extends StatefulWidget {
   final int number;
   final int? duration;

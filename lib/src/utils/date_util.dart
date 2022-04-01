@@ -4,26 +4,26 @@
 /// hour -> HH/H      minute -> mm/m   second -> ss/s
 class DateFormats {
   static String full = 'yyyy-MM-dd HH:mm:ss';
-  static String y_mo_d_h_m = 'yyyy-MM-dd HH:mm';
-  static String y_mo_d = 'yyyy-MM-dd';
-  static String y_mo = 'yyyy-MM';
-  static String mo_d = 'MM-dd';
-  static String mo_d_h_m = 'MM-dd HH:mm';
-  static String h_m_s = 'HH:mm:ss';
-  static String h_m = 'HH:mm';
+  static String yyyyMMDDHHMM = 'yyyy-MM-dd HH:mm';
+  static String yyyyMMDD = 'yyyy-MM-dd';
+  static String yyyyMM = 'yyyy-MM';
+  static String mmDD = 'MM-dd';
+  static String mmDDHHmm = 'MM-dd HH:mm';
+  static String hhMMss = 'HH:mm:ss';
+  static String hhMM = 'HH:mm';
 
-  static String zh_full = 'yyyy年MM月dd日 HH时mm分ss秒';
-  static String zh_y_mo_d_h_m = 'yyyy年MM月dd日 HH时mm分';
-  static String zh_y_mo_d = 'yyyy年MM月dd日';
-  static String zh_y_mo = 'yyyy年MM月';
-  static String zh_mo_d = 'MM月dd日';
-  static String zh_mo_d_h_m = 'MM月dd日 HH时mm分';
-  static String zh_h_m_s = 'HH时mm分ss秒';
-  static String zh_h_m = 'HH时mm分';
+  static String zhFull = 'yyyy年MM月dd日 HH时mm分ss秒';
+  static String zhYYYYmmDDHHmm = 'yyyy年MM月dd日 HH时mm分';
+  static String zhYYYYmmDD = 'yyyy年MM月dd日';
+  static String zhYYYYmm = 'yyyy年MM月';
+  static String zhMMdd = 'MM月dd日';
+  static String zhMMddHHmm = 'MM月dd日 HH时mm分';
+  static String zhHHMmmSS = 'HH时mm分ss秒';
+  static String zhHHmm = 'HH时mm分';
 }
 
 /// month->days.
-Map<int, int> MONTH_DAY = {
+Map<int, int> monthDay = {
   1: 31,
   2: 28,
   3: 31,
@@ -199,7 +199,7 @@ class DateUtil {
     int month = dateTime.month;
     int days = dateTime.day;
     for (int i = 1; i < month; i++) {
-      days = days + MONTH_DAY[i]!;
+      days = days + monthDay[i]!;
     }
     if (isLeapYearByYear(year) && month > 2) {
       days = days + 1;

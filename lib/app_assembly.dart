@@ -91,6 +91,8 @@ export 'src/widgets/button/button_loading.dart';
 export 'src/widgets/button/button_gradient.dart';
 export 'src/widgets/button/ios_back_button.dart';
 export 'src/widgets/button/cycle_button.dart';
+export 'src/widgets/button/common_water_btn.dart';
+export 'src/widgets/button/common_draggle_btn.dart';
 // 表单-输入框
 export 'src/widgets/form/common_textfiled.dart';
 export 'src/widgets/form/text_area.dart';
@@ -149,6 +151,12 @@ export 'src/widgets/uppanel/sliding_up_panel.dart';
 export 'src/widgets/uppanel/center_floating_bottom_bar.dart';
 //图片浏览与下载
 export 'src/widgets/uppanel/common_see_image_view.dart';
+//饼状图
+export 'src/widgets/uppanel/common_pie_view.dart';
+//空心文字
+export 'src/widgets/uppanel/common_hollow_text.dart';
+//圆形渐变进度条
+export 'src/widgets/uppanel/common_circle_progress_indicator.dart';
 //banner
 export 'src/widgets/banner/common_banner.dart';
 export 'src/widgets/banner/common_segment.dart';

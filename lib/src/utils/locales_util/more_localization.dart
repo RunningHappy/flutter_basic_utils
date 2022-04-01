@@ -16,7 +16,7 @@ class MoreLocalization implements CupertinoLocalizations {
     return _localValue[locale.languageCode];
   }
 
-  ///通过 Localizations.of(context,type) 加载当前的 FZLocalizations
+  /// 通过 Localizations.of(context,type) 加载当前的 FZLocalizations
   static MoreLocalization? of(BuildContext context) {
     // return CupertinoLocalizations.of(context);
     /// 实现CupertinoLocalizations抽象类后，取不到对象，得换成CupertinoLocalizations.of(context);

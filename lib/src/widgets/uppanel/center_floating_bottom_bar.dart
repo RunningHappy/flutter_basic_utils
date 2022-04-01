@@ -86,6 +86,7 @@ class _CenterFloatingBottomBarState extends State<CenterFloatingBottomBar> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       extendBody: true,
+      resizeToAvoidBottomInset: false,
       body: _pageList[_currentIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(

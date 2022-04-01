@@ -1,9 +1,12 @@
 import 'package:flutter/services.dart';
 
+///
+/// TextField 输入小数的自定义 formatter
+///
 class MyNumberTextInputFormatter extends TextInputFormatter {
   static const defaultDouble = 0.001;
 
-  ///允许的小数位数，-1代表不限制位数
+  /// 允许的小数位数，-1代表不限制位数
   int digit;
 
   /// 是否可输入负数
@@ -19,7 +22,7 @@ class MyNumberTextInputFormatter extends TextInputFormatter {
     }
   }
 
-  ///获取目前的小数位数
+  /// 获取目前的小数位数
   static int getValueDigit(String value) {
     if (value.contains(".")) {
       return value.split(".")[1].length;

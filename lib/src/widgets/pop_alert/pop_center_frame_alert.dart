@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-/// 中心弹出框框架
+///
+/// 中心弹出框框架，可以自定义中心弹窗内容
+///
 class PopCenterFrameAlert extends Dialog {
   final Widget? childWidget;
 
@@ -12,7 +14,7 @@ class PopCenterFrameAlert extends Dialog {
   }
 
   /// 显示对话框
-  static showMyDialog(BuildContext context, {required Widget childWidget}) {
+  static showAlert(BuildContext context, {required Widget childWidget}) {
     showDialog(
         context: context,
         barrierDismissible: false,
@@ -20,11 +22,11 @@ class PopCenterFrameAlert extends Dialog {
           return _CenterContent(childWidget: childWidget);
         });
   }
-
 }
 
 class _CenterContent extends StatefulWidget {
   final Widget? childWidget;
+
   const _CenterContent({Key? key, this.childWidget}) : super(key: key);
 
   @override
@@ -32,7 +34,6 @@ class _CenterContent extends StatefulWidget {
 }
 
 class _CenterContentState extends State<_CenterContent> {
-
   /// 拦截返回键
   Future<bool> _requestPop() {
     return Future.value(false);
@@ -54,4 +55,3 @@ class _CenterContentState extends State<_CenterContent> {
         ));
   }
 }
-

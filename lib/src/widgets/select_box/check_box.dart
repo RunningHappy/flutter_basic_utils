@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 复选框-含标题
+///
 class NewCheckBox extends StatefulWidget {
   final double width;
   final String? icon;

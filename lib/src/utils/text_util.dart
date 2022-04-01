@@ -1,7 +1,8 @@
+///
 /// 银行卡号每隔4位加空格，每隔3三位加逗号，隐藏手机号等等.
-/// Text Util.
+///
 class TextUtil {
-  /// isEmpty
+  /// 是否为空
   static bool isEmpty(String? text) {
     return text == null || text.isEmpty;
   }
@@ -49,7 +50,7 @@ class TextUtil {
     return '$left.$right';
   }
 
-  /// hideNumber
+  /// 手机号隐藏部分数字
   static String hideNumber(String phoneNo,
       {int start = 3, int end = 7, String replacement = '****'}) {
     return phoneNo.replaceRange(start, end, replacement);

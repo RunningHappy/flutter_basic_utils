@@ -1,4 +1,6 @@
+///
 /// 订阅者回调签名
+///
 typedef EventCallback = void Function(dynamic arg);
 
 var bus = EventBus();
