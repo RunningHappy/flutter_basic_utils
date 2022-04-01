@@ -24,8 +24,6 @@ export 'src/utils/local_storage_util.dart';
 export 'src/utils/shared_preferences_util.dart';
 // 校验
 export 'src/utils/number_text_input_formatter_util.dart';
-// export 'src/utils/number_util.dart';
-// export 'src/utils/money_util.dart';
 export 'src/utils/validator_util.dart';
 export 'src/utils/precision_limit_formatter_util.dart';
 // toast
