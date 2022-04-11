@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ///
-/// 确认对话框,可实现一个按钮，也可以实现两个按钮
+/// 确认对话框，可实现一个按钮，也可以实现两个按钮
 ///
 class MyConfirmDialog extends Dialog {
   final List<String> buttonItems;
@@ -12,10 +12,10 @@ class MyConfirmDialog extends Dialog {
 
   const MyConfirmDialog(
       {this.title,
-        this.content,
-        required this.buttonItems,
-        this.onTap,
-        Key? key})
+      this.content,
+      required this.buttonItems,
+      this.onTap,
+      Key? key})
       : assert(buttonItems.length > 0 && buttonItems.length <= 2),
         super(key: key);
 
@@ -24,7 +24,7 @@ class MyConfirmDialog extends Dialog {
     Navigator.of(context).pop();
   }
 
-  // 显示对话框
+  /// 显示对话框
   static showMyConfirmDialog(BuildContext context, List<String> buttonItems,
       {String? title, String? content, Function? onTap}) {
     showDialog(
@@ -46,14 +46,20 @@ class _ConfirmContent extends StatefulWidget {
   final String? title;
   final String? content;
   final Function? onTap;
-  const _ConfirmContent({Key? key, required this.buttonItems, this.title, this.content, this.onTap}) : super(key: key);
+
+  const _ConfirmContent(
+      {Key? key,
+      required this.buttonItems,
+      this.title,
+      this.content,
+      this.onTap})
+      : super(key: key);
 
   @override
   _ConfirmContentState createState() => _ConfirmContentState();
 }
 
 class _ConfirmContentState extends State<_ConfirmContent> {
-
   /// 拦截返回键
   Future<bool> _requestPop() {
     return Future.value(false);
@@ -77,22 +83,22 @@ class _ConfirmContentState extends State<_ConfirmContent> {
                 children: [
                   widget.title != ''
                       ? Container(
-                    margin: EdgeInsets.only(bottom: 32.h, top: 32.h),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          widget.title!,
-                          style: TextStyle(
-                              fontSize: 36.sp,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ],
-                    ),
-                  )
+                          margin: EdgeInsets.only(bottom: 32.h, top: 32.h),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                widget.title!,
+                                style: TextStyle(
+                                    fontSize: 36.sp,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                            ],
+                          ),
+                        )
                       : SizedBox(
-                    height: 80.h,
-                  ),
+                          height: 80.h,
+                        ),
                   Container(
                     padding: EdgeInsets.only(left: 40.w, right: 40.w),
                     child: Text(
@@ -118,36 +124,38 @@ class _ConfirmContentState extends State<_ConfirmContent> {
   Widget _getButtons() {
     return Row(
         children: widget.buttonItems.map((res) {
-          int index = widget.buttonItems.indexOf(res);
-          return Expanded(
-            child: GestureDetector(
-              onTap: () {
-                widget.onTap!(index);
-              },
-              child: Container(
-                alignment: Alignment.center,
-                height: 90.h,
-                decoration: BoxDecoration(
-                    border: Border(
-                        right: BorderSide(
-                            width: 0.5,
-                            color: widget.buttonItems.length == 2
-                                ? const Color(0xFFDDDDDD)
-                                : Colors.white))),
-                child: Text(
-                  res,
-                  style: TextStyle(
-                    fontSize: 32.sp,
-                    color: widget.buttonItems.length == 2 && index == 1
-                        ? const Color(0xFF177FF3)
-                        : const Color(0xFF606972),
-                  ),
-                  textAlign: TextAlign.center,
-                ),
+      int index = widget.buttonItems.indexOf(res);
+      return Expanded(
+        child: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+            if (widget.onTap != null) {
+              widget.onTap!(index);
+            }
+          },
+          child: Container(
+            alignment: Alignment.center,
+            height: 90.h,
+            decoration: BoxDecoration(
+                border: Border(
+                    right: BorderSide(
+                        width: 0.5,
+                        color: widget.buttonItems.length == 2
+                            ? const Color(0xFFDDDDDD)
+                            : Colors.white))),
+            child: Text(
+              res,
+              style: TextStyle(
+                fontSize: 32.sp,
+                color: widget.buttonItems.length == 2 && index == 1
+                    ? const Color(0xFF177FF3)
+                    : const Color(0xFF606972),
               ),
+              textAlign: TextAlign.center,
             ),
-          );
-        }).toList());
+          ),
+        ),
+      );
+    }).toList());
   }
 }
-

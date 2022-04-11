@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-///
 /// 底部弹窗，选中放大的内容
-///
 class PopBottomShowBigSheet extends Dialog {
   const PopBottomShowBigSheet({Key? key}) : super(key: key);
 
@@ -14,8 +12,8 @@ class PopBottomShowBigSheet extends Dialog {
   }
 
   /// 展示弹窗
-  static showSheet(BuildContext buildContext,
-      {int? index, required List pickerChildren, Function? sureCallBack}) {
+  static showBottomSheet(BuildContext buildContext,
+      {int index = 0, required List pickerChildren, Function? sureCallBack}) {
     showCupertinoModalPopup(
         context: buildContext,
         builder: (BuildContext buildContext) {

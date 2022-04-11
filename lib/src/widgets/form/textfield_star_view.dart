@@ -4,6 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 typedef CallBack = Function(String value);
 
+///
+/// 单行，含"*"标题+输入框/文本的item
+///
 class StarTextFieldView extends StatefulWidget {
   final TextEditingController? controller;
   final bool enable;

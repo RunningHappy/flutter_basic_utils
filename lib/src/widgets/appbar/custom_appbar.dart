@@ -3,7 +3,9 @@ import 'package:app_assembly/src/style/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 自定义 Appbar
+///
 class CustomAppbar extends StatelessWidget {
   const CustomAppbar({
     Key? key,

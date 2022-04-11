@@ -1,5 +1,3 @@
-library app_assembly;
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -22,7 +20,7 @@ enum ButtonType {
   /// 危险按钮
 }
 
-/// A Button.
+
 class LsjButton {
   Widget lsjButton(ButtonType type, GestureTapCallback? callback) {
     Widget? buttonWidget;

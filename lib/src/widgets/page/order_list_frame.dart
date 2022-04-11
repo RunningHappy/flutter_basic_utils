@@ -4,7 +4,9 @@ import 'package:app_assembly/src/utils/under_line_tab_indicator.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter/material.dart';
 
+///
 /// 订单类框架（可左右滑动，不包含筛选）
+///
 class OrderListFrame extends StatefulWidget {
   // 设置未选中时的字体颜色，tabs里面的字体样式优先级最高
   final Color? unselectedLabelColor;
@@ -34,7 +36,7 @@ class OrderListFrame extends StatefulWidget {
   final Decoration? indicator;
   final EdgeInsetsGeometry? labelPadding;
   final String naviTitle;
-  final List barTitles;
+  final List<String> barTitles;
   final List<Widget> body;
   final int selectIndex;
   final Function()? backCallback;
@@ -64,7 +66,8 @@ class OrderListFrame extends StatefulWidget {
 
 class _OrderListFrameState extends State<OrderListFrame>
     with TickerProviderStateMixin {
-  List _barTitles = [];
+  List<String> _barTitles = [];
+  List<Widget> _body = [];
   int _selectIndex = 0;
   late TabController _tabController;
   late PageController _pageController;
@@ -86,6 +89,9 @@ class _OrderListFrameState extends State<OrderListFrame>
   _init() {
     try {
       _barTitles = widget.barTitles;
+    } catch (e) {}
+    try {
+      _body = widget.body;
     } catch (e) {}
     try {
       _selectIndex = widget.selectIndex;
@@ -122,7 +128,6 @@ class _OrderListFrameState extends State<OrderListFrame>
           appBar: HqAppBar(
             widget.naviTitle,
             con: context,
-            backImg: "img/public_image/back_icon.png",
             tabBar: TabBar(
                 controller: _tabController,
                 onTap: (int index) {},
@@ -156,17 +161,16 @@ class _OrderListFrameState extends State<OrderListFrame>
             child: TabBarView(
                 physics: const ClampingScrollPhysics(),
                 controller: _tabController,
-                children: widget.body),
+                children: _body),
             onNotification: _pageViewScrollUtils.handleNotification,
           )),
     );
   }
 
   _getBarTitleView() {
-    List<Widget> widgets = [];
-    for (String element in _barTitles) {
+    return _barTitles.map((element) {
       double dWidth = element.length * 40.w;
-      widgets.add(Container(
+      return Container(
         // width: MediaQuery.of(context).size.width / 4,
         width: dWidth,
         margin: EdgeInsets.symmetric(horizontal: element.length > 4 ? 0 : 6.w),
@@ -175,8 +179,7 @@ class _OrderListFrameState extends State<OrderListFrame>
           element,
           style: TextStyle(color: const Color(0xFF606972), fontSize: 29.sp),
         ),
-      ));
-    }
-    return widgets;
+      );
+    }).toList();
   }
 }

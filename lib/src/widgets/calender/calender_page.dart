@@ -3,29 +3,30 @@ import 'package:flutter/material.dart';
 import 'calendar_view_modal.dart';
 import 'calender_item.dart';
 
-/*
-* Location 标记当前选中日期和之前的日期相比，
-* left： 是在之前日期之前
-* mid：  和之前日期相等
-* right：在之前日期之后
-* */
-
 enum Location { left, mid, right }
 
-typedef void SelectDateOnTap(
+typedef SelectDateOnTap = void Function(
     DayModel checkInTimeModel, DayModel leaveTimeModel);
 
+///
+/// Location 标记当前选中日期和之前的日期相比，
+/// left： 是在之前日期之前
+/// mid：  和之前日期相等
+/// right：在之前日期之后
+///
 class CalendarPage extends StatefulWidget {
   final DayModel? startTimeModel; // 外部传入的之前选中的入住日期
   final DayModel? endTimeModel; // 外部传入的之前选中的离开日期
   final SelectDateOnTap? selectDateOnTap; // 确定按钮的callback 给外部传值
   final bool hasInitTime;
 
-  CalendarPage(
-      {this.startTimeModel,
+  const CalendarPage(
+      {Key? key,
+      this.startTimeModel,
       this.endTimeModel,
       this.selectDateOnTap,
-      this.hasInitTime = false});
+      this.hasInitTime = false})
+      : super(key: key);
 
   @override
   _CalendarPageState createState() => _CalendarPageState();
@@ -51,7 +52,7 @@ class _CalendarPageState extends State<CalendarPage> {
     _list = CalendarViewModel().getItemList(
         widget.startTimeModel, widget.endTimeModel,
         hasInitTime: widget.hasInitTime);
-    // // 处理外部传入的选中日期
+    // 处理外部传入的选中日期
     if (widget.startTimeModel != null && widget.endTimeModel != null) {
       for (int i = 0; i < _list.length; i++) {
         CalendarItemViewModel model = _list[i];
@@ -67,9 +68,7 @@ class _CalendarPageState extends State<CalendarPage> {
     }
   }
 
-  /*
-  * 显示周的组件，使用了 _weekTitleItem
-  * */
+  /// 显示周的组件，使用了 _weekTitleItem
   _weekItem() {
     List<String> _listS = <String>[
       '日',
@@ -88,8 +87,7 @@ class _CalendarPageState extends State<CalendarPage> {
       height: 92.h,
       decoration: BoxDecoration(
           border: Border(
-              bottom:
-                  BorderSide(width: 1.w, color: const Color(0xFFDBDDE4)))),
+              bottom: BorderSide(width: 1.w, color: const Color(0xFFDBDDE4)))),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: _listW,
@@ -97,9 +95,7 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  /*
-  * 周内对应的每天的组件
-  * */
+  /// 周内对应的每天的组件
   _weekTitleItem(String title) {
     return Expanded(
         child: Container(
@@ -140,15 +136,14 @@ class _CalendarPageState extends State<CalendarPage> {
           padding: EdgeInsets.symmetric(vertical: 32.h),
           decoration: BoxDecoration(
               border: Border(
-                  top: BorderSide(
-                      width: 1.w, color: const Color(0xFFDBDDE4)))),
+                  top: BorderSide(width: 1.w, color: const Color(0xFFDBDDE4)))),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
                 '$_selectCheckInTime  到  $_selectLeaveTime',
-                style: TextStyle(
-                    fontSize: 32.sp, color: const Color(0xFF41485D)),
+                style:
+                    TextStyle(fontSize: 32.sp, color: const Color(0xFF41485D)),
               )
             ],
           ),
@@ -168,9 +163,7 @@ class _CalendarPageState extends State<CalendarPage> {
     );
   }
 
-  /*
-  * 比较后面的日期是比model日期小（left） 还是相等(mid) 还是大 (right)
-  * */
+  /// 比较后面的日期是比model日期小（left） 还是相等(mid) 还是大 (right)
   _compareTime(DayModel model, int year, int month, int day) {
     if (year > model.year) {
       return Location.right;
@@ -193,9 +186,7 @@ class _CalendarPageState extends State<CalendarPage> {
     }
   }
 
-  /*
-  * 更新日历的数据源
-  * */
+  /// 更新日历的数据源
   _updateDataSource(int year, int month, int checkInTime) {
     // 左右指针 用来记录选择的入住日期和离开日期
     var firstModel;
@@ -237,8 +228,7 @@ class _CalendarPageState extends State<CalendarPage> {
       _selectLeaveTime = '选择结束时间';
       _isSelectLeaveTimeModel = null;
     } else if (firstModel != null && lastModel == null) {
-      if (_compareTime(firstModel, year, month, checkInTime) ==
-          Location.left) {
+      if (_compareTime(firstModel, year, month, checkInTime) == Location.left) {
         for (int i = 0; i < _list.length; i++) {
           CalendarItemViewModel model = _list[i];
           model.firstSelectModel = null;
@@ -297,7 +287,7 @@ class _CalendarPageState extends State<CalendarPage> {
       } else if (_compareTime(firstModel, year, month, checkInTime) ==
           Location.right) {
         if (year > firstModel.year) {
-          int _calculaterDays = 1;
+          int _calculateDays = 1;
           for (int i = 0; i < _list.length; i++) {
             CalendarItemViewModel model = _list[i];
             if (model.year! < year) {
@@ -307,11 +297,11 @@ class _CalendarPageState extends State<CalendarPage> {
                   if (model.month == firstModel.month) {
                     if (dayModel.dayNum >= firstModel.dayNum) {
                       dayModel.isSelect = true;
-                      _calculaterDays++;
+                      _calculateDays++;
                     }
                   } else {
                     dayModel.isSelect = true;
-                    _calculaterDays++;
+                    _calculateDays++;
                   }
                 }
               }
@@ -328,19 +318,19 @@ class _CalendarPageState extends State<CalendarPage> {
                       _selectLeaveTime = '$year-$month-$checkInTime';
                     } else if (dayModel.dayNum < checkInTime) {
                       dayModel.isSelect = true;
-                      _calculaterDays++;
+                      _calculateDays++;
                     }
                   } else {
                     dayModel.isSelect = true;
-                    _calculaterDays++;
+                    _calculateDays++;
                   }
                 }
               }
             }
           }
-          _checkInDays = _calculaterDays;
+          _checkInDays = _calculateDays;
         } else {
-          int _calculaterDays = 1;
+          int _calculateDays = 1;
           // for(int i=0; i<_list.length; i++) {
           //   CalendarItemViewModel model = _list[i];
           //   if(model.month == firstModel.month){
@@ -348,21 +338,21 @@ class _CalendarPageState extends State<CalendarPage> {
           //       DayModel dayModel = model.list![i];
           //       if (dayModel.dayNum > firstModel.dayNum){
           //         dayModel.isSelect = true;
-          //         _calculaterDays++;
+          //         _calculateDays++;
           //       }
           //     }
           //   } else if(model.month!>firstModel.month && model.month!<month){
           //     for(int i=0; i<model.list!.length; i++) {
           //       DayModel dayModel = model.list![i];
           //       dayModel.isSelect = true;
-          //       _calculaterDays++;
+          //       _calculateDays++;
           //     }
           //   } else if(month == model.month){
           //     for(int i=0; i<model.list!.length; i++) {
           //       DayModel dayModel = model.list![i];
           //       if(dayModel.dayNum < checkInTime){
           //         dayModel.isSelect = true;
-          //         _calculaterDays++;
+          //         _calculateDays++;
           //       } else if (dayModel.dayNum == checkInTime) {
           //         dayModel.isSelect = true;
           //         model.lastSelectModel = dayModel;
@@ -373,7 +363,7 @@ class _CalendarPageState extends State<CalendarPage> {
           //     }
           //   }
           // }
-          // _checkInDays = _calculaterDays;
+          // _checkInDays = _calculateDays;
 
           for (int i = 0; i < _list.length; i++) {
             CalendarItemViewModel model = _list[i];
@@ -389,11 +379,11 @@ class _CalendarPageState extends State<CalendarPage> {
                 } else if (dayModel.dayNum < checkInTime) {
                   if (dayModel.month > firstModel.month) {
                     dayModel.isSelect = true;
-                    _calculaterDays++;
+                    _calculateDays++;
                   } else {
                     if (dayModel.dayNum >= firstModel.dayNum) {
                       dayModel.isSelect = true;
-                      _calculaterDays++;
+                      _calculateDays++;
                     } else {
                       dayModel.isSelect = false;
                     }
@@ -409,13 +399,13 @@ class _CalendarPageState extends State<CalendarPage> {
                     dayModel.month < month) {
                   if (dayModel.dayNum > firstModel.dayNum) {
                     dayModel.isSelect = true;
-                    _calculaterDays++;
+                    _calculateDays++;
                   }
                 }
               }
             }
           }
-          _checkInDays = _calculaterDays;
+          _checkInDays = _calculateDays;
         }
       }
     } else if (firstModel == null && lastModel == null) {
@@ -456,9 +446,7 @@ class _CalendarPageState extends State<CalendarPage> {
     }
   }
 
-  /*
-  * 点击日期的回调事件
-  * */
+  /// 点击日期的回调事件
   _updateCheckInLeaveTime(int year, int month, int checkInTime) {
     // 更新数据源
     _updateDataSource(year, month, checkInTime);
@@ -466,9 +454,7 @@ class _CalendarPageState extends State<CalendarPage> {
     setState(() {});
   }
 
-  /*
-  * 底部确定按钮的点击事件
-  * */
+  /// 底部确定按钮的点击事件
   _sureButtonTap() {
     if (!_isSelectCheckInTime) {
       EasyLoading.showToast('请选择开始时间');
@@ -481,7 +467,8 @@ class _CalendarPageState extends State<CalendarPage> {
         '${_selectCheckInTimeModel.year},${_selectCheckInTimeModel.month},${_selectCheckInTimeModel.dayNum}');
     debugPrint(
         '${_isSelectLeaveTimeModel.year},${_isSelectLeaveTimeModel.month},${_isSelectLeaveTimeModel.dayNum}');
-    debugPrint('入住日期：$_selectCheckInTime, 离开时间：$_selectLeaveTime, 共$_checkInDays晚');
+    debugPrint(
+        '入住日期：$_selectCheckInTime, 离开时间：$_selectLeaveTime, 共$_checkInDays晚');
     // 把日期回调给外部
     widget.selectDateOnTap!(_selectCheckInTimeModel, _isSelectLeaveTimeModel);
   }

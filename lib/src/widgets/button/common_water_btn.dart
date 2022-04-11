@@ -8,7 +8,12 @@ class CommonWaterButton extends StatefulWidget {
   final Duration? duration;
 
   const CommonWaterButton(this.color,
-      {this.innerSize = 48.0, this.outSize = 80.0, required this.innerIcon, this.duration});
+    {Key? key,
+    this.innerSize = 48.0,
+    this.outSize = 80.0,
+    required this.innerIcon,
+    this.duration})
+    : super(key: key);
 
   @override
   _CommonWaterButtonState createState() => _CommonWaterButtonState();
@@ -20,9 +25,7 @@ class _CommonWaterButtonState extends State<CommonWaterButton>
 
   @override
   void initState() {
-    _controller = AnimationController(
-        vsync: this, duration: widget.duration ?? Duration(milliseconds: 2000))
-      ..repeat();
+    _controller = AnimationController(vsync: this, duration: widget.duration ?? const Duration(milliseconds: 2000))..repeat();
     super.initState();
   }
 
@@ -35,29 +38,41 @@ class _CommonWaterButtonState extends State<CommonWaterButton>
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
-        animation: _controller,
-        builder: (context, child) {
-          return Stack(children: [
+      animation: _controller,
+      builder: (context, child) {
+        return Stack(
+          children: [
             CustomPaint(
-                size: Size(widget.outSize ?? widget.innerSize * 2,
-                    widget.outSize ?? widget.innerSize * 2),
-                painter: CommonWaterPainter(_controller.value, widget.color,
-                    widget.innerSize, widget.outSize)),
+              size: Size(
+                widget.outSize ?? widget.innerSize * 2,
+                widget.outSize ?? widget.innerSize * 2
+              ),
+              painter: CommonWaterPainter(
+                _controller.value,
+                widget.color,
+                widget.innerSize,
+                widget.outSize
+              )
+            ),
             Container(
-                color: Colors.grey.withOpacity(0.0),
-                width: widget.outSize ?? widget.innerSize * 2,
-                height: widget.outSize ?? widget.innerSize * 2,
-                child: widget.innerIcon == null
-                    ? Container()
-                    : Center(
-                    child: ClipOval(
-                        child: Container(
-                            width: widget.innerSize,
-                            height: widget.innerSize,
-                            color: widget.color,
-                            child: widget.innerIcon))))
-          ]);
-        });
+              color: Colors.grey.withOpacity(0.0),
+              width: widget.outSize ?? widget.innerSize * 2,
+              height: widget.outSize ?? widget.innerSize * 2,
+              child: Center(
+                child: ClipOval(
+                  child: Container(
+                    width: widget.innerSize,
+                    height: widget.innerSize,
+                    color: widget.color,
+                    child: widget.innerIcon
+                  )
+                )
+              )
+            )
+          ]
+        );
+      }
+    );
   }
 }
 
@@ -66,21 +81,14 @@ class CommonWaterPainter extends CustomPainter {
   final Color color;
   final double innerSize;
   final double? outSize;
-
-  Paint _paint = Paint()..style = PaintingStyle.fill;
+  final Paint _paint = Paint()..style = PaintingStyle.fill;
 
   CommonWaterPainter(this.progress, this.color, this.innerSize, this.outSize);
 
   @override
   void paint(Canvas canvas, Size size) {
-    _paint..color = color.withOpacity(1.0 - progress);
-
-    // double _radius = radius * progress;
-    // double _radius = radius * progress + innerSize * 0.5;
-    double _radius =
-        ((outSize ?? innerSize * 2) * 0.5 - innerSize * 0.5) * progress +
-            innerSize * 0.5;
-
+    _paint.color = color.withOpacity(1.0 - progress);
+    double _radius = ((outSize ?? innerSize * 2) * 0.5 - innerSize * 0.5) * progress + innerSize * 0.5;
     canvas.drawCircle(Offset(size.width / 2, size.height / 2), _radius, _paint);
   }
 

@@ -2,7 +2,9 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// 包含右角标数的 button - 消息
+///
+/// 包含头像，右角标数的 button - 消息
+///
 class MessageAvatarNumButton extends StatelessWidget {
   final String avatarUrl;
   final String placeholder;
@@ -22,7 +24,11 @@ class MessageAvatarNumButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: tapCallback,
+      onTap: () {
+        if (tapCallback != null) {
+          tapCallback!();
+        }
+      },
       child: Stack(
         children: [
           /// 头像

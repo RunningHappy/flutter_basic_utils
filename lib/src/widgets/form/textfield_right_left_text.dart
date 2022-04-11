@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 样式：左边文本+右边输入框
+///
 class MyTextInputPreLabel extends StatefulWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;

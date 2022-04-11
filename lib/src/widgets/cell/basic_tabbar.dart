@@ -8,7 +8,9 @@ enum BasicPageTag {
   me,
 }
 
+///
 /// 基础 TabBar
+///
 class BasicTabBar extends StatelessWidget {
   final Function(BasicPageTag)? onTabSwitch;
   final Function()? onAddButton;

@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:tapped/tapped.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 类似评论框架（包含头像、昵称、内容、时间）
+///
 class UserMsgRowCell extends StatelessWidget {
   final Widget? lead;
   final String? title;
@@ -49,8 +51,8 @@ class UserMsgRowCell extends StatelessWidget {
     var avatar = Container(
       margin: EdgeInsets.fromLTRB(0, 8.h, 10.w, 8.h),
       child: SizedBox(
-        height: 40.h,
-        width: 40.w,
+        height: 80.h,
+        width: 80.h,
         child: lead ??
             ClipOval(
               child: Image.network(

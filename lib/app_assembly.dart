@@ -63,6 +63,9 @@ export 'src/utils/text_util.dart';
 export 'src/widgets/page/order_list_frame.dart';
 export 'src/widgets/page/my_customer_frame.dart';
 export 'src/widgets/page/scroll_stop_table_frame.dart';
+export 'src/widgets/page/empty_page_frame.dart';
+export 'src/widgets/agreement/agree_agreement.dart';
+export 'src/widgets/form/form_hide_keyboard_widget.dart';
 // 导航栏
 export 'src/widgets/appbar/common_search_bar.dart';
 export 'src/widgets/appbar/common_trans_appbar.dart';
@@ -80,7 +83,7 @@ export 'src/widgets/button/button_common.dart';
 export 'src/widgets/button/button_login.dart';
 export 'src/widgets/button/button_more_color_login.dart';
 export 'src/widgets/button/button_detail.dart';
-export 'src/widgets/button/button_icon_title.dart';
+export 'src/widgets/button/button_icon_title_vertical.dart';
 export 'src/widgets/button/button_left_icon_right_text.dart';
 export 'src/widgets/button/button_left_text_right_icon.dart';
 export 'src/widgets/button/button_top_icon_bottom_text.dart';
@@ -117,30 +120,21 @@ export 'src/widgets/text/select_text.dart';
 export 'src/widgets/cell/common_title_switch_view.dart';
 // Cell 单元格
 export 'src/widgets/cell/cell_line.dart';
-// 单选框
+export 'src/widgets/cell/marquee.dart';
+export 'src/widgets/cell/rate_star.dart';
+export 'src/widgets/cell/steps_bar.dart';
+export 'src/widgets/cell/stepper_num.dart';
+// 选择框
 export 'src/widgets/select_box/radio_box.dart';
-// 复选框
 export 'src/widgets/select_box/check_box.dart';
-// 同意某协议
-export 'src/widgets/agreement/agree_agreement.dart';
-// Form 表单外必须包裹，点击隐藏键盘
-export 'src/widgets/form/form_hide_keyboard_widget.dart';
-// 空页面
-export 'src/widgets/empty_widget.dart';
 // 错误 widget(由于数据错误导致的错误)
 export 'src/widgets/error_widget.dart';
 // 成功 toast
 export 'src/widgets/toast/toast_success.dart';
-// 跑马灯
-export 'src/widgets/marquee_horizontal.dart';
+// 多位置toast
+export 'src/widgets/toast/toast_enum_gravity.dart';
 // 日期/时间选择器
 export 'src/widgets/picker/custom_month_picker.dart';
-// 星级评分
-export 'src/widgets/rate_star.dart';
-// 步骤条
-export 'src/widgets/steps_bar.dart';
-// 数量+/-
-export 'src/widgets/stepper_num.dart';
 // 弹出菜单
 export 'src/widgets/pop_menu/pop_menu_alert.dart';
 // 日历选择器
@@ -151,12 +145,16 @@ export 'src/widgets/uppanel/sliding_up_panel.dart';
 export 'src/widgets/uppanel/center_floating_bottom_bar.dart';
 //图片浏览与下载
 export 'src/widgets/uppanel/common_see_image_view.dart';
-//饼状图
-export 'src/widgets/uppanel/common_pie_view.dart';
 //空心文字
 export 'src/widgets/uppanel/common_hollow_text.dart';
 //圆形渐变进度条
 export 'src/widgets/uppanel/common_circle_progress_indicator.dart';
+//展开收齐气泡文字
+export 'src/widgets/uppanel/bubbletext/bubble_text.dart';
+//城市选择
+export 'src/widgets/uppanel/city_select/city_select.dart';
+//带箭头气泡提示
+export 'src/widgets/uppanel/popupwindow/pop_up_window.dart';
 //banner
 export 'src/widgets/banner/common_banner.dart';
 export 'src/widgets/banner/common_segment.dart';

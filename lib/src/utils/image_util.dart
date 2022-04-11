@@ -20,7 +20,7 @@ class ImageUtil {
     _imageInfoCallback = callback;
     _mContext = context;
     hideKeyboard(_mContext!);
-    MyActionSheet.showImageActionSheet(context, ["拍照上传", "相册选择"], onTap: (index) {
+    MyActionSheet.showMyActionSheet(context, ["拍照上传", "相册选择"], onTap: (index) {
       _requestPermission(context, index);
     });
   }

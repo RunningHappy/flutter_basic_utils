@@ -1,13 +1,20 @@
 import 'package:app_assembly/app_assembly.dart';
-import 'package:app_assembly/src/widgets/pop_menu/pop_route.dart';
-import 'package:app_assembly/src/widgets/pop_menu/pop_up.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+import 'pop_route.dart';
+import 'pop_up.dart';
+
+enum MenuDirection {
+  horizontal, // 水平
+  vertical // 垂直
+}
+
 ///
-/// 弹出气泡菜单，仿微信气泡弹出框
+/// 弹出菜单
 ///
 class PopupMenuAlert extends StatefulWidget {
+  final MenuDirection menuDirection;
   final double? containerWidth;
   final Widget child;
   final List titles;
@@ -15,6 +22,7 @@ class PopupMenuAlert extends StatefulWidget {
 
   const PopupMenuAlert(
       {Key? key,
+      this.menuDirection = MenuDirection.horizontal,
       this.containerWidth,
       required this.child,
       required this.titles,
@@ -58,7 +66,7 @@ class _PopupMenuAlertState extends State<PopupMenuAlert> {
   }
 
   _buildMenuWidget(bool isUp) {
-    double height = 84.h * widget.titles.length + 5.h * 2;
+    double height = (44.h + 13.h * 2) * widget.titles.length + 13.h;
     return Column(
       children: [
         // Image.asset("img/public_image/menu_up_arrow.png", height: 20.h, width: 40.w, fit: BoxFit.cover, color: const Color(KColors.color_10000000)),
@@ -99,6 +107,7 @@ class _PopupMenuAlertState extends State<PopupMenuAlert> {
                     )
               ]),
           child: ListView.builder(
+            physics: const NeverScrollableScrollPhysics(), // 禁止滚动
             padding: EdgeInsets.symmetric(vertical: 13.h),
             itemBuilder: (context, index) {
               return GestureDetector(

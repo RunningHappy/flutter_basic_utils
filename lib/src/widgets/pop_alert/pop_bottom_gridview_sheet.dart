@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ///
-/// 弹出底部菜单 sheet
+/// 弹出底部菜单 - 多选
 ///
 class PopBottomMenuSheet extends Dialog {
   const PopBottomMenuSheet({
@@ -17,10 +17,11 @@ class PopBottomMenuSheet extends Dialog {
     Navigator.of(context).pop();
   }
 
-  // 显示对话框
+  /// 显示对话框
   static showBottomSheet(BuildContext context,
       {required List? dataList,
       required List? selectIndexList,
+      String title = "",
       Function? onTap}) {
     showDialog(
         context: context,
@@ -28,18 +29,26 @@ class PopBottomMenuSheet extends Dialog {
         useSafeArea: false,
         builder: (BuildContext context) {
           return MenuContentView(
-              selectIndexList: selectIndexList, tapCallback: onTap);
+              title: title,
+              dataList: dataList,
+              selectIndexList: selectIndexList,
+              tapCallback: onTap);
         });
   }
 }
 
 class MenuContentView extends StatefulWidget {
+  final String? title;
   final List? dataList;
   final List? selectIndexList;
   final Function? tapCallback;
 
   const MenuContentView(
-      {Key? key, this.dataList, this.selectIndexList, this.tapCallback})
+      {Key? key,
+      this.title,
+      this.dataList,
+      this.selectIndexList,
+      this.tapCallback})
       : super(key: key);
 
   @override
@@ -53,7 +62,7 @@ class _MenuContentViewState extends State<MenuContentView> {
 
   @override
   void initState() {
-    _init();
+    _goodsTypeList();
     super.initState();
   }
 
@@ -69,13 +78,6 @@ class _MenuContentViewState extends State<MenuContentView> {
     }
   }
 
-  _init() {
-    Future.delayed(Duration.zero, () {
-      _goodsTypeList();
-    });
-    _updateWidget();
-  }
-
   _reset() {
     for (Map e in _dataList) {
       e["select"] = false;
@@ -85,9 +87,9 @@ class _MenuContentViewState extends State<MenuContentView> {
   }
 
   // 供应类型
-  _goodsTypeList() async {
+  _goodsTypeList() {
     for (var e in widget.dataList!) {
-      _dataList.add({"name": e.gtTypeName, "state": e.gtId, "select": false});
+      _dataList.add({"name": e["name"], "state": e["state"], "select": false});
     }
     if (widget.selectIndexList != null) {
       _selectIndexList = widget.selectIndexList!;
@@ -135,7 +137,7 @@ class _MenuContentViewState extends State<MenuContentView> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            '供应类型',
+                            widget.title ?? "",
                             style: TextStyle(
                                 fontSize: 32.sp,
                                 color: const Color(0xFF1D2023),
@@ -193,11 +195,8 @@ class _MenuContentViewState extends State<MenuContentView> {
                       child: Container(
                         margin: EdgeInsets.only(right: 24.h, top: 24.h),
                         color: Colors.white,
-                        child: Image.asset(
-                          'img/public_image/close_btn.png',
-                          width: 48.h,
-                          height: 48.h,
-                        ),
+                        child:
+                            Icon(Icons.close, size: 48.h, color: Colors.black),
                       ),
                     )
                   ],

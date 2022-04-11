@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
+/// 圆角按钮
+///
 class CycleButton extends GestureDetector {
   final String title;
   final Color color;

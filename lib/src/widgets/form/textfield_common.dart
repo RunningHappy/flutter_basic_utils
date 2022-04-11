@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-/// 通用input 组件,带点击删除
+///
+/// 通用 input 组件，带点击删除
+///
 class MyTextField extends StatefulWidget {
   final TextEditingController? controller;
   final TextInputType? keyboardType;
@@ -19,7 +21,7 @@ class MyTextField extends StatefulWidget {
   final double? fontSize;
   final List<TextInputFormatter>? inputFormatters;
   final InputDecoration? decoration;
-  final onChangeCallback;
+  final Function(String value)? onChangeCallback;
 
   const MyTextField(
       {Key? key,
@@ -110,7 +112,11 @@ class _MyTextFieldState extends State<MyTextField> {
           focusNode: widget.focusNode,
           readOnly: widget.readOnly,
           enabled: widget.enabled,
-          onChanged: widget.onChangeCallback,
+          onChanged: (value) {
+            if (widget.onChangeCallback != null) {
+              widget.onChangeCallback!(value);
+            }
+          },
           decoration: widget.decoration ??
               InputDecoration(
                 isCollapsed: true,

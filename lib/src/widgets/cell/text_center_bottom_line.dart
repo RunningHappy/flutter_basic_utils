@@ -2,7 +2,9 @@ import 'package:app_assembly/src/widgets/cell/line_cell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 中心文字底部线
+///
 class TextCenterBottomLineCell extends StatelessWidget {
   final bool isCancel;
   final String title;
@@ -15,7 +17,11 @@ class TextCenterBottomLineCell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: tapCallback,
+      onTap: () {
+        if (tapCallback != null) {
+          tapCallback!();
+        }
+      },
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
@@ -37,8 +43,7 @@ class TextCenterBottomLineCell extends StatelessWidget {
                   : Text(
                       title,
                       style: TextStyle(
-                          fontSize: 32.sp,
-                          color: const Color(0xFF41485D)),
+                          fontSize: 32.sp, color: const Color(0xFF41485D)),
                     ),
             ),
             isCancel ? Container() : const LineCell()

@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
+/// 多行，含"*"标题+输入框/文本的item
+///
 class StarTextFieldViewItem extends StatefulWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;

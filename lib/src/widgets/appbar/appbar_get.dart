@@ -3,7 +3,9 @@ import 'package:app_assembly/src/utils/under_line_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 获取Appbar
+///
 AppBar getAppBar(BuildContext context,
     {String title = "",
     appBarTitleType = AppBarTitleType.text,
@@ -16,7 +18,7 @@ AppBar getAppBar(BuildContext context,
     Widget? flexibleSpace,
     PreferredSizeWidget? bottom,
     TabController? controller}) {
-  Widget titleContent = getTitle(title, color: color!);
+  Widget titleContent = getTitle(title, color: color ?? Colors.black);
   if (appBarTitleType == AppBarTitleType.tabs) {
     assert(pages != null);
     titleContent = getTabs(pages!, controller: controller!);
@@ -24,10 +26,15 @@ AppBar getAppBar(BuildContext context,
   return AppBar(
     title: titleContent,
     backgroundColor: backgroundColor ?? Colors.white,
-    leading: leading ?? getLeading(context, onTap: onTap!, color: color),
+    leading: leading ??
+        getLeading(context, onTap: () {
+          if (onTap != null) {
+            onTap.call();
+          }
+        }, color: color ?? Colors.black),
     actions: action,
     flexibleSpace: flexibleSpace,
-    bottom: bottom!,
+    // bottom: bottom,
   );
 }
 
@@ -52,7 +59,7 @@ Widget getTitle(String title, {Color? color}) {
   );
 }
 
-Widget getTabs(List pages, {bool? isScrollable, TabController? controller}) {
+Widget getTabs(List pages, {bool? isScrollable, required TabController controller}) {
   return TabBar(
     isScrollable: isScrollable ?? true,
     controller: controller,

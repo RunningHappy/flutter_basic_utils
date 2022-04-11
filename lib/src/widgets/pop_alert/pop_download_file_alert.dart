@@ -3,7 +3,7 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 
 ///
-/// 弹出文件下载组件（含下载提示和下载文件到sd卡）
+/// 弹出文件下载组件
 ///
 class PopDownloadFileAlert extends Dialog {
   const PopDownloadFileAlert({
@@ -16,13 +16,13 @@ class PopDownloadFileAlert extends Dialog {
   }
 
   /// 显示对话框
-  static showDownloadDialog(BuildContext context,
-      {String? name, String? msgContent, Function(String path)? onTap}) {
+  static showDownloadFileDialog(BuildContext context,
+      {String? fileName, String? msgContent, Function(String path)? onTap}) {
     MyConfirmDialog.showMyConfirmDialog(context, ['取消', '下载'],
         title: '', content: msgContent ?? '您下载查看合同吗？', onTap: (index) {
       Navigator.pop(context);
       if (index == 1) {
-        _createPath(context, name, onTap: onTap);
+        _createPath(context, fileName, onTap: onTap);
       }
     });
   }

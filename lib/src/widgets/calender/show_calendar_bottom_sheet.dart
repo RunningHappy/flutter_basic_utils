@@ -1,11 +1,12 @@
 import 'dart:io';
-import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'calendar_view_modal.dart';
 import 'calender_page.dart';
 
+///
 /// 日历选择器
+///
 class CalendarSelectorBottomSheet extends Dialog {
   const CalendarSelectorBottomSheet({
     Key? key,
@@ -16,7 +17,7 @@ class CalendarSelectorBottomSheet extends Dialog {
     Navigator.of(context).pop();
   }
 
-  // 显示对话框
+  /// 显示对话框
   static showMyConfirmDialog(BuildContext context,
       {Function? onTap, String? startTime, String? endTime}) {
     showDialog(
@@ -101,8 +102,7 @@ class _CalendarContentViewState extends State<CalendarContentView> {
                                   '选择时间',
                                   style: TextStyle(
                                       fontSize: 36.sp,
-                                      color: const Color(
-                                          0xFF1D2023),
+                                      color: const Color(0xFF1D2023),
                                       fontWeight: FontWeight.w600),
                                 )
                               ],
@@ -160,11 +160,7 @@ class _CalendarContentViewState extends State<CalendarContentView> {
                       child: Container(
                         margin: EdgeInsets.only(right: 32.h, top: 32.h),
                         color: Colors.white,
-                        child: Image.asset(
-                          'img/bidding_enterprise/salesman/home/bottom_close_icon.png',
-                          width: 48.h,
-                          height: 48.h,
-                        ),
+                        child: Icon(Icons.close, size: 48.h),
                       ),
                     )
                   ],

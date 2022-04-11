@@ -2,7 +2,9 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:tapped/tapped.dart';
 
+///
 /// 基础纵向按钮column
+///
 class BasicButtonColumn extends StatelessWidget {
   final double? bottomPadding;
   final bool isFavorite;
@@ -10,6 +12,7 @@ class BasicButtonColumn extends StatelessWidget {
   final Function? onComment;
   final Function? onShare;
   final Function? onAvatar;
+
   const BasicButtonColumn({
     Key? key,
     this.bottomPadding,
@@ -41,7 +44,8 @@ class BasicButtonColumn extends StatelessWidget {
             isFavorite: isFavorite,
           ),
           _IconButton(
-            icon: const IconToText(Icons.mode_comment, size: SystemFontSize.iconBig - 4),
+            icon: const IconToText(Icons.mode_comment,
+                size: SystemFontSize.iconBig - 4),
             text: '4213',
             onTap: onComment,
           ),
@@ -146,12 +150,13 @@ class IconToText extends StatelessWidget {
   final Color? color;
 
   const IconToText(
-      this.icon, {
-        Key? key,
-        this.style,
-        this.size,
-        this.color,
-      }) : super(key: key);
+    this.icon, {
+    Key? key,
+    this.style,
+    this.size,
+    this.color,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Text(
@@ -171,6 +176,7 @@ class _IconButton extends StatelessWidget {
   final Widget? icon;
   final String? text;
   final Function? onTap;
+
   const _IconButton({
     Key? key,
     this.icon,

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
+/// 含渐变色的圆角按钮
+///
 class MoreColorLoginButton extends GestureDetector {
   final String title;
   final bool type;
@@ -27,10 +30,10 @@ class MoreColorLoginButton extends GestureDetector {
       child: Container(
         decoration: BoxDecoration(
             gradient: LinearGradient(
-                //渐变位置
+                // 渐变位置
                 begin: Alignment.centerLeft,
                 end: Alignment.bottomRight,
-                //渐变颜色[始点颜色, 结束颜色]
+                // 渐变颜色[始点颜色, 结束颜色]
                 colors: type
                     ? [const Color(0xFF5E80FF), const Color(0xFF4E70F0)]
                     : [const Color(0x305E80FF), const Color(0x304E70F0)]),

@@ -1,11 +1,13 @@
 import 'dart:math';
 import 'dart:ui' as ui;
-
 import 'package:flutter/material.dart';
 
 typedef CircleProgressIndicatorChildBuilder = Widget Function(
     BuildContext context, AnimationController animationController);
 
+///
+/// 含进度的加载indicator
+///
 class CircleProgressIndicatorWidget extends StatefulWidget {
   /// 进度值 0~1
   final double value;
@@ -31,7 +33,7 @@ class CircleProgressIndicatorWidget extends StatefulWidget {
   /// 高
   final double? height;
 
-  CircleProgressIndicatorWidget({
+  const CircleProgressIndicatorWidget({
     Key? key,
     required this.value,
     required this.totalDuration,
@@ -41,21 +43,16 @@ class CircleProgressIndicatorWidget extends StatefulWidget {
     this.child,
     this.width,
     this.height,
-  })  : assert((color != null && gradient != null) == false, "error: 纯色,渐变只能有一个"),
-        super(key: key);
+  }) : assert((color != null && gradient != null) == false, "error: 纯色,渐变只能有一个"),super(key: key);
 
   @override
-  _CircleProgressIndicatorWidgetState createState() =>
-      _CircleProgressIndicatorWidgetState();
+  _CircleProgressIndicatorWidgetState createState() => _CircleProgressIndicatorWidgetState();
 }
 
-class _CircleProgressIndicatorWidgetState
-    extends State<CircleProgressIndicatorWidget>
-    with SingleTickerProviderStateMixin {
+class _CircleProgressIndicatorWidgetState extends State<CircleProgressIndicatorWidget> with SingleTickerProviderStateMixin {
   late AnimationController animationController;
 
-  double get _animateValue =>
-      animationController.upperBound - animationController.value;
+  double get _animateValue => animationController.upperBound - animationController.value;
 
   @override
   void initState() {
@@ -65,13 +62,11 @@ class _CircleProgressIndicatorWidgetState
       lowerBound: 0,
       upperBound: widget.value,
       duration: widget.totalDuration * widget.value,
-    )
-      ..addListener(
-            () {
-          setState(() {});
-        },
-      )
-      ..repeat();
+    )..addListener(
+      () {
+        setState(() {});
+      },
+    )..repeat();
   }
 
   @override
@@ -89,7 +84,7 @@ class _CircleProgressIndicatorWidgetState
     return AnimatedBuilder(
       animation: animationController,
       builder: (BuildContext context, Widget? child) {
-        return Container(
+        return SizedBox(
           width: widget.width ?? double.infinity,
           height: widget.height ?? double.infinity,
           // color: Colors.amberAccent.withOpacity(0.3),
@@ -100,9 +95,7 @@ class _CircleProgressIndicatorWidgetState
               gradient: widget.gradient,
               strokeWidth: widget.strokeWidth ?? 10,
             ),
-            child: widget.child != null
-                ? widget.child!(context, animationController)
-                : null,
+            child: widget.child != null ? widget.child!(context, animationController) : null,
           ),
         );
       },
@@ -125,6 +118,7 @@ class _CircleProgressPainter extends CustomPainter {
     this.color,
     this.gradient,
   }) : super();
+
   @override
   void paint(Canvas canvas, Size size) {
     var centerPoint = Point(size.width / 2, size.height / 2);
@@ -134,20 +128,18 @@ class _CircleProgressPainter extends CustomPainter {
       ..strokeWidth = strokeWidth
       ..strokeCap = StrokeCap.round;
     if (color != null) {
-      _paint.color = this.color!;
+      _paint.color = color!;
       _paint.strokeCap = StrokeCap.round; // 端点变圆,当颜色渐变时效果不好,所以最后设置为纯色时才有这个效果
     }
     if (gradient != null) {
-      _paint.shader = ui.Gradient.sweep(Offset(centerPoint.y, centerPoint.x),
-          gradient!.colors, gradient!.stops);
+      _paint.shader = ui.Gradient.sweep(Offset(centerPoint.y, centerPoint.x),gradient!.colors, gradient!.stops);
       _paint.strokeCap = StrokeCap.round;
     }
     canvas
       ..translate(centerPoint.x, centerPoint.y) // 因为rotate以(0,0)为锚点
       ..rotate(-pi / 2) // 旋转90度使起始角为 y 轴
       ..translate(-centerPoint.y, -centerPoint.x)
-      ..drawArc(Rect.fromLTWH(0, 0, size.height, size.width), 0, 2 * pi * value,
-          false, _paint);
+      ..drawArc(Rect.fromLTWH(0, 0, size.height, size.width), 0, 2 * pi * value, false, _paint);
   }
 
   @override

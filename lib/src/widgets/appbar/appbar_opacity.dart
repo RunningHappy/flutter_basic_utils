@@ -2,6 +2,9 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
+/// 列表滚动，改变 Appbar 透明度
+///
 class OpacityAppBar extends StatefulWidget {
   final Widget? child;
   final String title;

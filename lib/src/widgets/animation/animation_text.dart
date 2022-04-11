@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-///
 /// 数字自动增加动画
-///
 class AnimationText extends StatefulWidget {
   final int number;
   final int? duration;
@@ -44,7 +42,7 @@ class _AnimationTextState extends State<AnimationText>
         duration: Duration(milliseconds: widget.duration ?? 2000), vsync: this);
     CurvedAnimation curve =
         CurvedAnimation(parent: _animationController!, curve: Curves.easeIn);
-    _animation = IntTween(begin: 0, end: 300).animate(curve)
+    _animation = IntTween(begin: 0, end: widget.number).animate(curve)
       ..addStatusListener((status) {
         if (status == AnimationStatus.completed) {
 //         controller.reverse();

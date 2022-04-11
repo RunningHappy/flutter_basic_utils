@@ -2,7 +2,9 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 自定义切换 Appbar
+///
 class CustomSwitchAppbar extends StatelessWidget {
   final int? index;
   final List<String>? list;

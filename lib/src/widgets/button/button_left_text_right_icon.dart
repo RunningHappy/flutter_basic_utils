@@ -21,7 +21,11 @@ class LeftTextRightIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: tapCallback,
+      onTap: () {
+        if (tapCallback != null) {
+          tapCallback!();
+        }
+      },
       child: SizedBox(
         height: height,
         width: width,

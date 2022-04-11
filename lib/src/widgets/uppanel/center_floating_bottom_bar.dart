@@ -6,7 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 底部tabBar
+///
 class CenterFloatingBottomBar extends StatefulWidget {
   final List<Widget> pageList;
   final String centerImage;
@@ -23,8 +25,9 @@ class CenterFloatingBottomBar extends StatefulWidget {
   final double? imageTitlePadding;
   final double? imageWidth;
   final Color? barBackColor;
-  const CenterFloatingBottomBar({
-    Key? key,
+
+  const CenterFloatingBottomBar(
+    {Key? key,
     required this.pageList,
     required this.centerImage,
     required this.normalBarImage,
@@ -39,15 +42,14 @@ class CenterFloatingBottomBar extends StatefulWidget {
     this.barHeight,
     this.imageTitlePadding,
     this.imageWidth,
-    this.barBackColor
-  }) : super(key: key);
+    this.barBackColor})
+    : super(key: key);
 
   @override
   _CenterFloatingBottomBarState createState() => _CenterFloatingBottomBarState();
 }
 
 class _CenterFloatingBottomBarState extends State<CenterFloatingBottomBar> {
-
   /// 当前页面的索引
   int _currentIndex = 0;
   DateTime? _lastPopTime;
@@ -69,13 +71,12 @@ class _CenterFloatingBottomBarState extends State<CenterFloatingBottomBar> {
   }
 
   Future<bool> onWillPop() async {
-    if(_lastPopTime == null || DateTime.now().difference(_lastPopTime!) > const Duration(seconds: 2)) {
+    if (_lastPopTime == null || DateTime.now().difference(_lastPopTime!) > const Duration(seconds: 2)) {
       _lastPopTime = DateTime.now();
       EasyLoading.showToast('再按一次退出');
     } else {
       _lastPopTime = DateTime.now();
-      // 退出app
-      // AppAndroidBackTop.backDeskTop();
+      // 退出 app
       await SystemChannels.platform.invokeMethod('SystemNavigator.pop');
     }
     return Future.value(false);
@@ -93,17 +94,15 @@ class _CenterFloatingBottomBarState extends State<CenterFloatingBottomBar> {
         child: Image.asset(
           widget.centerImage,
         ),
-        onPressed: (){
-
-        },
+        onPressed: () {},
       ),
       bottomNavigationBar: Container(
-        height: widget.barHeight??65.h,
+        height: widget.barHeight ?? 65.h,
         color: Colors.transparent,
         child: BottomAppBar(
-          shape: CircularNotchedRectangle(),
+          shape: const CircularNotchedRectangle(),
           notchMargin: 6.h,
-          color: widget.barBackColor??Colors.white,
+          color: widget.barBackColor ?? Colors.white,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: _getBarItemList(),
@@ -113,58 +112,60 @@ class _CenterFloatingBottomBarState extends State<CenterFloatingBottomBar> {
     );
   }
 
-  _getBarItemList(){
+  _getBarItemList() {
     List<Widget> children = [];
-    for(var i = 0; i < widget.normalBarImage.length; i++){
+    for (var i = 0; i < widget.normalBarImage.length; i++) {
       children.add(buildBarItem(i, _currentIndex));
-      if(i == (widget.normalBarImage.length / 2 - 1)){
+      if (i == (widget.normalBarImage.length / 2 - 1)) {
         children.add(buildBarItem(-1, _currentIndex));
       }
     }
     return children;
   }
 
-  buildBarItem(int? index,int? selectIndex){
+  buildBarItem(int? index, int? selectIndex) {
     return Expanded(
-        child: GestureDetector(
-          onTap: (){
-            setState(() {
-              _currentIndex = index!;
-            });
-          },
-          child: index! == -1 ? Container() : Container(
-            color: Colors.transparent,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.asset(
-                  selectIndex == index ? widget.activeBarImage[index] : widget.normalBarImage[index],
-                  width: widget.imageWidth??24.h,
-                  height: widget.imageWidth??24.h,
-                ),
-                widget.barTitleList != null ? widget.barTitleList!.isNotEmpty ? Column(
-                  children: [
-                    SizedBox(height: widget.imageTitlePadding??5.h,),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          widget.barTitleList![index],
-                          style: TextStyle(
-                            fontSize: selectIndex == index ? widget.activeTitleSize : widget.normalTitleSize,
-                            color: selectIndex == index ? widget.activeTitleColor : widget.normalTitleColor,
-                            fontWeight: selectIndex == index ? widget.activeFontWeight : widget.normalFontWeight
-                          ),
-                        )
-                      ],
-                    )
-                  ],
-                ) : Container() : Container()
-              ],
-            ),
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            _currentIndex = index!;
+          });
+        },
+        child: index! == -1 ? Container() : Container(
+          color: Colors.transparent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                selectIndex == index ? widget.activeBarImage[index] : widget.normalBarImage[index],
+                width: widget.imageWidth ?? 24.h,
+                height: widget.imageWidth ?? 24.h,
+              ),
+              widget.barTitleList != null ? widget.barTitleList!.isNotEmpty ? Column(
+                children: [
+                  SizedBox(
+                    height: widget.imageTitlePadding ?? 5.h,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        widget.barTitleList![index],
+                        style: TextStyle(
+                          fontSize: selectIndex == index ? widget.activeTitleSize : widget.normalTitleSize,
+                          color: selectIndex == index ? widget.activeTitleColor : widget.normalTitleColor,
+                          fontWeight: selectIndex == index ? widget.activeFontWeight : widget.normalFontWeight
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ) : Container() : Container()
+            ],
           ),
-        )
+        ),
+      )
     );
   }
 }

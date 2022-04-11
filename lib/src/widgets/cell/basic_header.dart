@@ -2,10 +2,13 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:tapped/tapped.dart';
 
+///
 /// 基础 header 多个导航
+///
 class BasicHeader extends StatefulWidget {
   final List<String>? titleList;
   final Function? onSearch;
+
   const BasicHeader({
     Key? key,
     this.titleList,
@@ -18,6 +21,7 @@ class BasicHeader extends StatefulWidget {
 
 class _BasicHeaderState extends State<BasicHeader> {
   int currentSelect = 0;
+
   @override
   Widget build(BuildContext context) {
     List<String> list = widget.titleList ?? ['推荐', '本地'];

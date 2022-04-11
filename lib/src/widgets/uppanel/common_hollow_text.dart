@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
-///空心字体1
+///
+/// 空心字体1
+///
 class HollowText1 extends StatelessWidget {
-  final double strokeWidth; //描边宽度
-  final Color strokeColor; //描边颜色
-  final Text child; //Text
+  final double strokeWidth; // 描边宽度
+  final Color strokeColor; // 描边颜色
+  final Text child; // Text
 
   const HollowText1({
     Key? key,
@@ -18,7 +20,7 @@ class HollowText1 extends StatelessWidget {
     return Stack(
       children: [
         Text(
-          child.data??'',
+          child.data ?? '',
           style: child.style!.copyWith(
             foreground: Paint()
               ..style = PaintingStyle.stroke
@@ -45,13 +47,15 @@ class HollowText1 extends StatelessWidget {
   }
 }
 
-///空心字体2
+///
+/// 空心字体2
+///
 class HollowText2 extends StatelessWidget {
-  final String text; //内容
-  final double size; //字体大小
-  final Color hollowColor; //空心颜色
-  final double strokeWidth; //描边宽度
-  final Color strokeColor; //描边颜色
+  final String text; // 内容
+  final double size; // 字体大小
+  final Color hollowColor; // 空心颜色
+  final double strokeWidth; // 描边宽度
+  final Color strokeColor; // 描边颜色
 
   const HollowText2({
     Key? key,

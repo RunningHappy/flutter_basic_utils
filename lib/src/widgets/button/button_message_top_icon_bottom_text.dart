@@ -2,7 +2,9 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 上图片，下文字，右边有角标数的 button
+///
 class MessageNumTopIconBottomTextButton extends StatelessWidget {
   final String icon;
   final String title;
@@ -24,7 +26,11 @@ class MessageNumTopIconBottomTextButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: tapCallback,
+      onTap: () {
+        if (tapCallback != null) {
+          tapCallback!();
+        }
+      },
       child: Stack(
         children: [
           Container(

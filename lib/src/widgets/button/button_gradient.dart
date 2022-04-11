@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 圆角 渐变色 阴影 button
+///
 class CircleGradientButton extends StatelessWidget {
   final double height;
   final double width;
@@ -21,7 +23,11 @@ class CircleGradientButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: tapCallback,
+      onTap: () {
+        if (tapCallback != null) {
+          tapCallback!();
+        }
+      },
       child: Container(
         height: height,
         width: width,

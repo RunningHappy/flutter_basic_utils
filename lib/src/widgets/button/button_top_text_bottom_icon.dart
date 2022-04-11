@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 上文本，下图片 button
+///
 class TopTextBottomIconButton extends StatelessWidget {
   final String icon;
   final String title;
@@ -21,7 +23,11 @@ class TopTextBottomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: tapCallback,
+      onTap: () {
+        if (tapCallback != null) {
+          tapCallback!();
+        }
+      },
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.h),
         child: Column(

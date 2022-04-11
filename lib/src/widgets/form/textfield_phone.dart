@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
+/// 手机号输入框
+///
 class PhoneTextField extends StatefulWidget {
   final TextEditingController phoneController;
   final String holdText;
   final Function? callBack;
-  final bool showClear;
+  final bool showClear; // 是否显示清除按钮
   final TextAlign? textAlign;
 
   const PhoneTextField(

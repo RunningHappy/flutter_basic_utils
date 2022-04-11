@@ -2,17 +2,19 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 横向滚动 tab
-class PurchaseQuotationSegment extends StatefulWidget
+///
+class HorizontalScrollSegment extends StatefulWidget
     implements PreferredSizeWidget {
   final BuildContext? context;
   final List dataList;
-  const PurchaseQuotationSegment({Key? key, required this.context, required this.dataList})
+  const HorizontalScrollSegment({Key? key, required this.context, required this.dataList})
       : super(key: key);
 
   @override
-  _PurchaseQuotationSegmentState createState() =>
-      _PurchaseQuotationSegmentState();
+  _HorizontalScrollSegmentState createState() =>
+      _HorizontalScrollSegmentState();
 
   @override
   Size get preferredSize {
@@ -20,10 +22,19 @@ class PurchaseQuotationSegment extends StatefulWidget
   }
 }
 
-class _PurchaseQuotationSegmentState extends State<PurchaseQuotationSegment> {
+class _HorizontalScrollSegmentState extends State<HorizontalScrollSegment> {
   // {'gtTypeName': '全部', 'select': true, 'gtId': 0}
   List _dataList = [];
   final ScrollController _scrollController = ScrollController();
+  final List<GlobalKey> _keys = <GlobalKey>[];
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    bus.off('updateTypes');
+    bus.off('refreshTypes');
+  }
 
   @override
   void initState() {
@@ -33,10 +44,10 @@ class _PurchaseQuotationSegmentState extends State<PurchaseQuotationSegment> {
     Future.delayed(Duration.zero, () {
       getListContent();
     });
-    initEvent();
+    _initEvent();
   }
 
-  initEvent() {
+  _initEvent() {
     bus.on('updateTypes', (arg) {
       if (mounted) {
         getListContent();
@@ -51,6 +62,8 @@ class _PurchaseQuotationSegmentState extends State<PurchaseQuotationSegment> {
             item['select'] = false;
           }
         }
+        _scrollController.animateTo(0,
+            duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
         setState(() {});
         // bus.emit('changeBiddingType',{'gtId':0});
         // bus.emit('changeInviteType',{'gtId':0});
@@ -61,27 +74,41 @@ class _PurchaseQuotationSegmentState extends State<PurchaseQuotationSegment> {
   getListContent() async {
     setState(() {
       _dataList = widget.dataList;
+      for(int i = 0;i < _dataList.length; i++) {
+        _keys.add(GlobalKey(debugLabel:i.toString()));
+      }
     });
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    bus.off('updateTypes');
-    bus.off('refreshTypes');
-  }
+  // 滚动 Item 到指定位置，这里滚动到屏幕正中间，横向滚动的
+  void _scrollItemToCenter(int pos) {
+    if (_keys.isEmpty) return;
 
-  // 获取某个widget 的坐标 我们这里可以得到
-  double _renderObjectX(GlobalKey globalKey) {
-    RenderObject? evaluationRenderObject = globalKey.currentContext!.findRenderObject();
-    return  evaluationRenderObject!.getTransformTo(null).getTranslation().x;
-  }
+    // 获取 item 的尺寸和位置
+    RenderBox box = _keys[pos].currentContext!.findRenderObject() as RenderBox;
+    Offset os = box.localToGlobal(Offset.zero);
 
-  // 获取 widget 在屏幕上的坐标点，然后比较屏幕中心点的x值，然后进行 +/-
-  double _renderObjectOriginX(GlobalKey globalKey) {
-    RenderBox renderBox = globalKey.currentContext!.findRenderObject() as RenderBox;
-    return renderBox.localToGlobal(Offset.zero).dx;
+    double w = box.size.width;
+    double x = os.dx;
+
+    // 获取屏幕宽高
+    double windowW = MediaQuery.of(context).size.width;
+
+    // 就算当前 item 距离屏幕中央的相对偏移量
+    double rlOffset = windowW / 2 - (x + w / 2);
+
+    // 计算 _controller 应该滚动的偏移量
+    double offset = _scrollController.offset - rlOffset;
+    debugPrint("偏移量：$offset");
+    if (offset < 0) {
+      _scrollController.animateTo(0,
+          duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+    } else {
+      if (pos != _keys.length - 1) {
+        _scrollController.animateTo(offset,
+            duration: const Duration(milliseconds: 200), curve: Curves.easeInOut);
+      }
+    }
   }
 
   @override
@@ -105,26 +132,10 @@ class _PurchaseQuotationSegmentState extends State<PurchaseQuotationSegment> {
                       itemCount: _dataList.length,
                       scrollDirection: Axis.horizontal,
                       itemBuilder: (context, index) {
-                        GlobalKey _globalKey = GlobalKey();
                         return GestureDetector(
-                          key: _globalKey,
+                          key: _keys[index],
                           onTap: () {
-                            // if (dataList.length >= 4) {
-                            //   if (index >= 4 || index <= dataList.length - 4) {
-                            //     double itemWidthX = _renderObjectX(_globalKey);
-                            //     double itemOnScreenWidthX = _renderObjectOriginX(_globalKey);
-                            //     if (itemOnScreenWidthX < 10) {
-                            //       itemWidthX = itemWidthX + 50.w;
-                            //     } else if (itemOnScreenWidthX > 260) {
-                            //       itemWidthX = itemWidthX - 50.w;
-                            //     }
-                            //     debugPrint("偏移量：itemWidthX");
-                            //     // 进行跳转
-                            //     _scrollController.animateTo(itemWidthX,
-                            //         duration: const Duration(milliseconds: 2), curve: Curves.ease);
-                            //   }
-                            // }
-
+                            _scrollItemToCenter(index);
                             for (var item in _dataList) {
                               item['select'] = false;
                             }

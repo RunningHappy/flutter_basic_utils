@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
+/// 自带搜索框的Appbar
+///
 searchAppBar(BuildContext context, TextEditingController searchController,
     TextInputType type, String holdText, String backImgPath,
-    {Function? searchAction, List<TextInputFormatter>? inputFormatters}) {
+    {String? searchIconName, Function? searchAction, List<TextInputFormatter>? inputFormatters}) {
   return AppBar(
     elevation: 0,
     centerTitle: true,
@@ -16,7 +19,8 @@ searchAppBar(BuildContext context, TextEditingController searchController,
           onTap: () {
             Navigator.pop(context);
           },
-          child: Image.asset(
+          child: backImgPath.isEmpty ? const Icon(Icons.arrow_back_ios, color: Colors.black) :
+          Image.asset(
             backImgPath,
             width: 43.w,
             height: 43.w,
@@ -34,6 +38,7 @@ searchAppBar(BuildContext context, TextEditingController searchController,
               color: const Color(0xFFF2F2F2)),
           child: Row(
             children: [
+              searchIconName == null ? const Icon(Icons.search, color: Colors.black) :
               Image.asset(
                 'img/my_page_icon/get_in_car_search.png',
                 width: 29.w,
@@ -63,6 +68,7 @@ searchAppBar(BuildContext context, TextEditingController searchController,
             ],
           ),
         )),
+        backImgPath.isEmpty ? Container() :
         Image.asset(
           backImgPath,
           width: 43.h,

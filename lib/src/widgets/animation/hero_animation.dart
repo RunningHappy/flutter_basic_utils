@@ -1,11 +1,11 @@
+import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-///
 /// hero 转场动画
-///
 class HeroAnimation extends StatelessWidget {
-  const HeroAnimation({Key? key}) : super(key: key);
+  final Widget? child;
+  const HeroAnimation({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class HeroAnimation extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => const NewPage(),
+                          builder: (_) => NewPage(child: child),
                           fullscreenDialog: true));
                 },
                 child: Hero(
@@ -29,6 +29,8 @@ class HeroAnimation extends StatelessWidget {
                     color: Colors.red,
                     width: 300.w,
                     height: 300.w,
+                    alignment: Alignment.center,
+                    child: const Text("跳转", style: StandardTextStyle.big),
                   ),
                 ))
           ],
@@ -39,7 +41,8 @@ class HeroAnimation extends StatelessWidget {
 }
 
 class NewPage extends StatelessWidget {
-  const NewPage({Key? key}) : super(key: key);
+  final Widget? child;
+  const NewPage({Key? key, this.child}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

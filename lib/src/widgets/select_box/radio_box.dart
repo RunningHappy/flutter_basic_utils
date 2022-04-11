@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-///
 /// 单选框-含标题
-///
 class NewRadioBox extends StatefulWidget {
   final double? fontSize;
   final double width;
@@ -51,7 +49,9 @@ class _NewRadioBoxState extends State<NewRadioBox> {
           setState(() {
             isSure = !isSure;
           });
-          widget.tapCallback!(widget.index);
+          if (widget.tapCallback != null) {
+            widget.tapCallback!(widget.index, isSure ? 1 : 0);
+          }
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

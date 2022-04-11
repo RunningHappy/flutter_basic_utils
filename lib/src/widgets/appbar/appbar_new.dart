@@ -90,18 +90,17 @@ newAppBar(BuildContext context, String title, Color backgroundColor,
       leading: showBack
           ? GestureDetector(
               onTap: back,
-              child: iconPath == ""
-                  ? Container()
-                  : Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 29.w, vertical: 28.w),
-                      child: Image.asset(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 29.w, vertical: 28.w),
+                child: iconPath == ""
+                    ? Icon(Icons.arrow_back_ios, color: iconColor)
+                    : Image.asset(
                         iconPath,
                         width: 43.w,
                         height: 43.w,
                         color: iconColor,
                       ),
-                    ),
+              ),
             )
           : Container(),
       actions: setNewAction());

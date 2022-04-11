@@ -3,6 +3,7 @@
 #### 文本（text）
 <br/>
 SelectText	文本选择
+AdMusicText 修正字体偏移无法对齐
 <br/>
 
 #### 按钮（button）
@@ -12,12 +13,16 @@ SelectText	文本选择
 	DetailBtn	含边框线按钮
 	<br/>
 	CircleGradientButton	渐变色按钮
+	CommonGradientBtn
+	MoreColorLoginButton
 	<br/>
-	IconTitleButton	图文按钮
+	IconTitleHorizontalButton	横向图文按钮
 	<br/>
 	LoadingButton	含loading的按钮
+	AdMusicLoadingButton
 	<br/>
 	MessageAvatarNumButton	含角标数量的按钮
+	MessageNumTopIconBottomTextButton
 	<br/>
 	LeftIconRightTextButton	左图片，右文本 按钮
 	<br/>
@@ -26,6 +31,16 @@ SelectText	文本选择
 	TopIconBottomTextButton	上图片，下文字按钮
 	<br/>
 	TopTextBottomIconButton	上文本，下图片按钮
+	<br/>
+	CommonWaterButton 水波纹按钮
+	<br/>
+	LoginButton 含状态的圆角按钮
+	<br/>
+	CommonDraggleButton 悬浮拖拽按钮
+	<br/>
+	IosBackButton iOS返回按钮
+	<br/>
+	LineBorderBtn 含边框线的按钮
 <br/>
 
 #### 输入框（textfield）
@@ -78,6 +93,16 @@ SuccessToast	含图片的提示框
 	CommentBottomSheet	底部弹出评论sheet（包含头像、昵称、内容、时间）
 	<br/>
 	MyConfirmDialog	确认对话框
+	<br/>
+	PopBottomCommentSheet 类似评论列表弹窗
+	<br/>
+	PopBottomFrameSheet 底部弹窗框架，可自定义内容容器
+	<br/>
+	PopBottomShowBigSheet 底部弹窗，选中放大的内容
+	<br/>
+	PopCenterFrameAlert 中心弹出框框架，可以自定义中心弹窗内容
+	<br/>
+	MyActionSheet 底部弹出对话框
 <br/>
 
 #### 选择器（picker）
@@ -94,6 +119,8 @@ SuccessToast	含图片的提示框
 	OrderListFrame	可左右滑动，不包含筛选
 	<br/>
 	ScrollStopTableFrame	悬停 tab 的列表框架
+	<br/>
+	CommentBottomSheet	底部弹出评论sheet（包含头像、昵称、内容、时间）
 <br/>
 
 #### 常用（appbar）
@@ -101,6 +128,12 @@ SuccessToast	含图片的提示框
     CommonSearchBar	搜索框导航栏
     <br/>
 	CommonTansAppBar  背景渐变导航栏
+	<br/>
+	OpacityAppBar 列表滚动，改变 Appbar 透明度
+	<br/>
+	CustomAppbar 自定义Appbar
+	<br>
+	CustomSwitchAppbar 自定义切换Appbar
 <br/>
 
 #### 常用（cell）
@@ -128,11 +161,55 @@ SuccessToast	含图片的提示框
 	StepperNumber	“+/- ”数量
 	<br/>
 	StepBar	步骤条
+	<br/>
+	BasicSwitchAppbar 基础AppBar
+	<br/>
+	BasicButtonColumn 基础纵向按钮column
+	<br/>
+	BasicHeader 基础header多个导航
+	<br/>
+	BasicScaffoldController 基础scaffold
+	<br/>
+	BasicTabBar 基础TabBar
+	<br/>
+	TopToolRow 自定义导航
 <br/>
 
 #### uppanel
 <br/>
     SlidingUpPanelView	上拉显示抽屉效果
+    <br/>
+    CenterFloatingBottomBar 底部悬浮按钮
+    <br/>
+    HollowText1 空心字体1
+    <br/>
+    CommonPiePainter 饼图
+    <br/>
+    CommonPieWidget 饼图
+    <br/>
+    CommonImageView 预览图片
+<br/>
+
+#### banner
+<br/>
+    CommonBanner 轮播
+    <br/>
+    CommonSegment 菜单轮播
+<br/>
+
+#### 动画(Animation)
+<br/>
+    ExampleHeartAnimation 心跳动画
+    <br/>
+    HeroAnimation hero转场动画
+    <br/>
+    OpenNextAnimation "孔雀开屏"转场动画
+    <br/>
+    PageTurnAnimation 翻页动画
+    <br/>
+    ZoomInAndOutLogo 放大缩小循环的动画显示
+    <br/>
+    ZoomInSlowlyLogo 逐渐放大的动画显示
 <br/>
 
 #### 工具类（utils）

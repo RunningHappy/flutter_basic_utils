@@ -1,8 +1,7 @@
+import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 
-///
 /// 心跳动画
-///
 class ExampleHeartAnimation extends StatelessWidget {
   final Widget? child;
 
@@ -11,6 +10,9 @@ class ExampleHeartAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: newAppBar(context, 'HeartAnimation', ThemeData().primaryColor,
+          Colors.white, true, '',
+          titleWorld: '', titleColor: Colors.white, iconColor: Colors.white),
       body: HeartAnimation(key: animationKey, child: child),
       floatingActionButton: FloatingActionButton(
         child: const Icon(Icons.add),

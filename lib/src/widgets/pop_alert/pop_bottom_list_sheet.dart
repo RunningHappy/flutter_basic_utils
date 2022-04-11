@@ -3,9 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-///
-/// 弹出底部列表 sheet
-///
+/// 弹出底部列表 - 单选
 class PopBottomListSheet extends Dialog {
   const PopBottomListSheet({
     Key? key,
@@ -17,7 +15,7 @@ class PopBottomListSheet extends Dialog {
   }
 
   /// 显示对话框
-  static showBottomListSheet(BuildContext context,
+  static showBottomSheet(BuildContext context,
       {int? index,
       required List pickerChildren,
       required Function sureCallBack}) {
@@ -66,18 +64,21 @@ class _ListContentViewState extends State<ListContentView> {
             height: height,
             child: Stack(
               children: [
-                ListView.builder(
-                    padding: EdgeInsets.only(bottom: 158.h),
-                    itemCount: widget.pickerChildren!.length,
-                    itemBuilder: (context, index) {
-                      Map e = widget.pickerChildren![index];
-                      return TextCenterBottomLineCell(
-                          title: e["name"],
-                          tapCallback: () {
-                            Navigator.pop(context);
-                            widget.sureCallBack!(e);
-                          });
-                    }),
+                Container(
+                  margin: EdgeInsets.only(bottom: 158.h),
+                  child: ListView.builder(
+                      padding: const EdgeInsets.all(0),
+                      itemCount: widget.pickerChildren!.length,
+                      itemBuilder: (context, index) {
+                        Map e = widget.pickerChildren![index];
+                        return TextCenterBottomLineCell(
+                            title: e["name"],
+                            tapCallback: () {
+                              Navigator.pop(context);
+                              widget.sureCallBack!(e);
+                            });
+                      }),
+                ),
                 Positioned(
                   left: 0,
                   right: 0,

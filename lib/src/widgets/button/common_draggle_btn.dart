@@ -76,7 +76,6 @@ class _CommonDraggleButtonState extends State<CommonDraggleButton> {
       child: Listener(
         onPointerMove: (PointerMoveEvent pointerMoveEvent){
           _updatePosition(pointerMoveEvent);
-
           setState(() {
             isDraggle = true;
           });

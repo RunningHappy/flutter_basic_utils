@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ///
-/// 底部弹出对话框
+/// 底部弹出对话框 - 类似点头像打开相册，相机弹窗
 ///
 class MyActionSheet extends StatelessWidget {
   final List<String>? buttonItems;
@@ -17,7 +17,7 @@ class MyActionSheet extends StatelessWidget {
   }
 
   /// 显示对话框
-  static showImageActionSheet(BuildContext context, List<String> buttonItems,
+  static showMyActionSheet(BuildContext context, List<String> buttonItems,
       {Function? onTap}) {
     showModalBottomSheet(
         backgroundColor: Colors.white,
@@ -63,6 +63,7 @@ class MyActionSheet extends StatelessWidget {
                     int index = buttonItems!.indexOf(title);
                     return GestureDetector(
                       onTap: () {
+                        Navigator.pop(context);
                         if (onTap != null) {
                           onTap!(index);
                         }

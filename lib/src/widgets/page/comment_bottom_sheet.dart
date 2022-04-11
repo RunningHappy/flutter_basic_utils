@@ -1,10 +1,11 @@
 import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:app_assembly/src/widgets/pop_alert/basic_bottom_sheet.dart'
+    as custom_bottom_sheet;
 
-///
 /// 底部弹出评论sheet（包含头像、昵称、内容、时间）
-///
 class CommentBottomSheet extends Dialog {
   const CommentBottomSheet({
     Key? key,
@@ -17,14 +18,12 @@ class CommentBottomSheet extends Dialog {
 
   /// 显示对话框
   static showCommentDialog(BuildContext context,
-      {Function? onTap, String? startTime, String? endTime}) {
-    showDialog(
-        context: context,
-        barrierDismissible: false,
-        useSafeArea: false,
-        builder: (BuildContext context) {
-          return const CommentBottomSheetContent();
-        });
+      {Function? onTap}) {
+    custom_bottom_sheet.showModalBottomSheet(
+      backgroundColor: Colors.white.withOpacity(0),
+      context: context,
+      builder: (BuildContext context) => const CommentBottomSheetContent(),
+    );
   }
 }
 
@@ -58,7 +57,7 @@ class CommentBottomSheetContent extends StatelessWidget {
             // color: Colors.white.withOpacity(0.2),
             child: const Text(
               '128条评论',
-              style: StandardTextStyle.small,
+              style: StandardTextStyle.smallWithOpacity,
             ),
           ),
           Expanded(
@@ -103,7 +102,7 @@ class _CommentRow extends StatelessWidget {
         Container(height: 2.h),
         const Text(
           '这是一条模拟评论，主播666啊。',
-          style: StandardTextStyle.normal,
+          style: StandardTextStyle.smallWithOpacity,
         ),
       ],
     );
@@ -116,7 +115,7 @@ class _CommentRow extends StatelessWidget {
         ),
         Text(
           '54',
-          style: StandardTextStyle.small,
+          style: StandardTextStyle.smallWithOpacity,
         ),
       ],
     );

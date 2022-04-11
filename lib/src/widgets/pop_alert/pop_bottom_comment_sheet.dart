@@ -1,10 +1,11 @@
 import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
-import 'package:app_assembly/src/widgets/pop_alert/basic_bottom_sheet.dart' as custom_bottom_sheet;
+import 'package:app_assembly/src/widgets/pop_alert/basic_bottom_sheet.dart'
+    as custom_bottom_sheet;
 
 ///
 /// 类似评论列表弹窗
-/// 
+///
 class PopBottomCommentSheet extends Dialog {
   const PopBottomCommentSheet({Key? key}) : super(key: key);
 
@@ -19,8 +20,7 @@ class PopBottomCommentSheet extends Dialog {
     custom_bottom_sheet.showModalBottomSheet(
       backgroundColor: Colors.white.withOpacity(0),
       context: context,
-      builder: (BuildContext context) =>
-      const _CommentContent(),
+      builder: (BuildContext context) => const _CommentContent(),
     );
   }
 }

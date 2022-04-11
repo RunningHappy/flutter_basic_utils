@@ -1,7 +1,9 @@
 import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 
+///
 /// 基础 AppBar
+///
 class BasicSwitchAppbar extends StatelessWidget {
   final int? index;
   final List<String>? list;

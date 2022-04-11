@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
+/// 圆角按钮
+///
 class DetailBtn extends GestureDetector {
   final Color lineColor;
   final Color titleColor;
   final String title;
   final double fontSize;
   final double? radius;
-  final Function callBack;
+  final Function? callBack;
 
   DetailBtn(
       {Key? key,
       this.radius,
       required this.title,
       required this.titleColor,
-      required this.callBack,
+      this.callBack,
       required this.lineColor,
       required this.fontSize})
       : super(key: key);
@@ -24,7 +27,9 @@ class DetailBtn extends GestureDetector {
     // TODO: implement build
     return GestureDetector(
       onTap: () {
-        callBack();
+        if (callBack != null) {
+          callBack!();
+        }
       },
       child: Container(
         decoration: BoxDecoration(

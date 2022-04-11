@@ -9,7 +9,9 @@ enum MyPasswordInputType {
   mathNumShow // 含随机数字展示类型
 }
 
+///
 /// 支付密码框
+///
 class PayPasswordTextField extends StatefulWidget {
   final HBPasswordInputTextFieldType type; // 格子样式
   final Function? onChange;

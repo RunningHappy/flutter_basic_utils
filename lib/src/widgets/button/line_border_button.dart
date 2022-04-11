@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
+/// 含边框线的按钮
+///
 class LineBorderBtn extends StatelessWidget {
   final String title;
   final double? fontSize;
@@ -8,7 +11,7 @@ class LineBorderBtn extends StatelessWidget {
   final double? paddingV;
   final Color? textColor;
   final double? radius;
-  final onTap;
+  final Function? onTap;
 
   const LineBorderBtn(
       {Key? key,
@@ -24,12 +27,16 @@ class LineBorderBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () {
+        if (onTap != null) {
+          onTap!();
+        }
+      },
       child: Container(
         decoration: BoxDecoration(
             border: Border.all(
                 width: 1.w, color: textColor ?? const Color(0xFF177FF3)),
-            borderRadius: BorderRadius.circular(radius??4.h)),
+            borderRadius: BorderRadius.circular(radius ?? 4.h)),
         padding: EdgeInsets.symmetric(
             horizontal: paddingH ?? 25.w, vertical: paddingV ?? 18.h),
         child: Row(

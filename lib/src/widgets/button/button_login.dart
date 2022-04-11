@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
+/// 含状态的圆角按钮
+///
 class LoginButton extends GestureDetector {
   final String title;
   final bool type;

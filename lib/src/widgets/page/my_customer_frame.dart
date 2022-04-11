@@ -2,7 +2,9 @@ import 'package:app_assembly/src/utils/under_line_tab_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 我的客户类框架（导航栏多选bar，可左右滑动，不包含筛选）
+///
 class MyCustomerFrame extends StatefulWidget {
   // 设置未选中时的字体颜色，tabs里面的字体样式优先级最高
   final Color? unselectedLabelColor;
@@ -31,8 +33,8 @@ class MyCustomerFrame extends StatefulWidget {
   // 用于设定选中状态下的展示样式
   final Decoration? indicator;
   final EdgeInsetsGeometry? labelPadding;
-  final List barTitles;
-  final Widget body;
+  final List<String> barTitles;
+  final List<Widget> body;
   final Function()? backCallback;
 
   const MyCustomerFrame(
@@ -59,8 +61,9 @@ class MyCustomerFrame extends StatefulWidget {
 class _MyCustomerFrameState extends State<MyCustomerFrame>
     with TickerProviderStateMixin {
   late TabController _tabController;
-  late PageController _pageController;
-  final List _barTitles = [];
+  final PageController _pageController = PageController(initialPage: 0);
+  List<String> _barTitles = [];
+  List<Widget> _body = [];
 
   @override
   void initState() {
@@ -76,6 +79,8 @@ class _MyCustomerFrameState extends State<MyCustomerFrame>
   }
 
   _init() async {
+    _barTitles = widget.barTitles;
+    _body = widget.body;
     var index = 0;
     _tabController = TabController(
         vsync: this, initialIndex: index, length: _barTitles.length);
@@ -131,13 +136,12 @@ class _MyCustomerFrameState extends State<MyCustomerFrame>
                 child: Container(
                   padding:
                       EdgeInsets.symmetric(horizontal: 29.w, vertical: 28.w),
-                  child: Image.asset("img/public_image/back_icon.png",
-                      width: 43.w, height: 43.w, fit: BoxFit.cover),
+                  child: Icon(Icons.arrow_back_ios, size: 43.h, color: Colors.black),
                 ),
               )),
           body: PageView.builder(
             itemBuilder: (context, index) {
-              return widget.body;
+              return _body[index];
             },
             itemCount: _barTitles.length,
             controller: _pageController,
@@ -152,17 +156,15 @@ class _MyCustomerFrameState extends State<MyCustomerFrame>
   }
 
   _getBarTitleView() {
-    List<Widget> widgets = [];
-    for (var element in _barTitles) {
-      widgets.add(Container(
+    return _barTitles.map((element) {
+      return Container(
         width: 165.w,
         alignment: Alignment.center,
         child: Text(
           element,
-          style: TextStyle(color: const Color(0xFF606972), fontSize: 29.sp),
+          style: TextStyle(color: const Color(0xFF606972), fontSize: 29.sp)
         ),
-      ));
-    }
-    return widgets;
+      );
+    }).toList();
   }
 }

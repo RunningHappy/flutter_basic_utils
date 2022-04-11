@@ -2,6 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
+///
+/// 月份选择器
+///
 class CustomMonthPicker {
   static Future<DateTime> showMonthPicker(
     BuildContext context, {
@@ -19,11 +22,11 @@ class CustomMonthPicker {
       context,
       _MonthPickerRoute(
         showTitleActions: showTitleActions,
-        onChanged: onChanged!,
-        onConfirm: onConfirm!,
-        onCancel: onCancel!,
+        onChanged: onChanged,
+        onConfirm: onConfirm,
+        onCancel: onCancel,
         locale: locale,
-        theme: theme!,
+        theme: theme,
         barrierLabel:
             MaterialLocalizations.of(context).modalBarrierDismissLabel,
         pickerModel: DatePickerModel(
@@ -89,8 +92,8 @@ class _MonthPickerRoute<T> extends PopupRoute<T> {
       context: context,
       removeTop: true,
       child: _MonthPickerComponent(
-        onChanged: onChanged!,
-        locale: locale!,
+        onChanged: onChanged,
+        locale: locale,
         route: this,
         pickerModel: pickerModel,
       ),

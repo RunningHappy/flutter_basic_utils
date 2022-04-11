@@ -2,13 +2,14 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'calendar_view_modal.dart';
 
-typedef void OnTapDayItem(int year, int month, int checkInTime);
+typedef OnTapDayItem = void Function(int year, int month, int checkInTime);
 
 class CalendarItem extends StatefulWidget {
   final CalendarItemViewModel itemModel;
   final OnTapDayItem dayItemOnTap;
 
-  CalendarItem(this.dayItemOnTap, this.itemModel);
+  const CalendarItem(this.dayItemOnTap, this.itemModel, {Key? key})
+      : super(key: key);
 
   @override
   _CalendarItemState createState() => _CalendarItemState();
@@ -26,9 +27,7 @@ class _CalendarItemState extends State<CalendarItem> {
     _listModel = widget.itemModel.list!;
   }
 
-  /*
-  * 根据当前年月份计算当前月份显示几行
-  * */
+  /// 根据当前年月份计算当前月份显示几行
   static int getRowsForMonthYear(
       int year, int month, MaterialLocalizations localizations) {
     int currentMonthDays = DateUtil.getDaysInMonth(year, month);
@@ -43,17 +42,13 @@ class _CalendarItemState extends State<CalendarItem> {
     return rows;
   }
 
-  /*
-  * 每个月前面空出来的天数
-  * */
+  /// 每个月前面空出来的天数
   static int numberOfHeadPlaceholderForMonth(
       int year, int month, MaterialLocalizations localizations) {
     return computeFirstDayOffset(year, month, localizations);
   }
 
-  /*
-  * 得到这个月的第一天是星期几（0 是 星期日 1 是 星期一...）
-  * */
+  /// 得到这个月的第一天是星期几（0 是 星期日 1 是 星期一...）
   static int computeFirstDayOffset(
       int year, int month, MaterialLocalizations localizations) {
     // 0-based day of week, with 0 representing Monday.
@@ -76,15 +71,12 @@ class _CalendarItemState extends State<CalendarItem> {
     return Column(
       children: <Widget>[
         _yearMonthItem(widget.itemModel.year!, widget.itemModel.month!),
-        _monthAllDays(
-            widget.itemModel.year!, widget.itemModel.month!, context),
+        _monthAllDays(widget.itemModel.year!, widget.itemModel.month!, context),
       ],
     );
   }
 
-  /*
-  * 显示年月的组件，需要传入年月日期
-  * */
+  /// 显示年月的组件，需要传入年月日期
   _yearMonthItem(int year, int month) {
     return Container(
       padding: EdgeInsets.symmetric(horizontal: 32.w, vertical: 34.h),
@@ -170,10 +162,7 @@ class _CalendarItemState extends State<CalendarItem> {
     );
   }
 
-  /*
-  * number 月的几号
-  * isOverdue 是否过期
-  * */
+  /// number 月的几号 isOverdue 是否过期
   _dayTitleItem(DayModel model, BuildContext context) {
     String dayTitle = model.day;
     String subTitle = '';

@@ -11,7 +11,9 @@ enum BasicPagePosition {
   middle,
 }
 
+///
 /// 基础 scaffold
+///
 class BasicScaffoldController extends ValueNotifier<BasicPagePosition> {
   BasicScaffoldController([
     BasicPagePosition value = BasicPagePosition.middle,
@@ -87,6 +89,7 @@ class _BasicScaffoldState extends State<BasicScaffold>
   late Animation<double> animationY;
   double offsetX = 0.0;
   double offsetY = 0.0;
+
   // int currentIndex = 0;
   double inMiddle = 0;
 
@@ -346,6 +349,7 @@ class _MiddlePage extends StatelessWidget {
     required this.tabBar,
     this.page,
   }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     Widget tabBarContainer = tabBar ??
@@ -450,6 +454,7 @@ class _LeftPageTransform extends StatelessWidget {
 
   const _LeftPageTransform({Key? key, this.offsetX, this.content})
       : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
