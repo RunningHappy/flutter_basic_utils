@@ -9,7 +9,7 @@ class TitleModel {
 }
 
 ///
-///滑动选项卡
+/// 滑动选项卡
 ///
 class CommonSegment extends Container {
   final List<TitleModel> titleList; // 选项卡集合
@@ -26,21 +26,23 @@ class CommonSegment extends Container {
   final double? radius; // 选项卡圆角
   final Function(dynamic)? callBack; // 选项卡点击回调
   CommonSegment(
-    {Key? key,
-    this.height,
-    required this.titleList,
-    this.itemWidth,
-    this.itemHeight,
-    this.fontSize,
-    this.callBack,
-    this.normalColor,
-    this.selectColor,
-    this.normalBackColor,
-    this.selectBackColor,
-    this.paddingRight,
-    this.paddingLeft,
-    this.radius})
-    : super(key: key);
+      {Key? key,
+        this.height,
+        required this.titleList,
+        this.itemWidth,
+        this.itemHeight,
+        this.fontSize,
+        this.callBack,
+        this.normalColor,
+        this.selectColor,
+        this.normalBackColor,
+        this.selectBackColor,
+        this.paddingRight,
+        this.paddingLeft,
+        this.radius})
+      : super(key: key);
+
+  static int _selectIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -50,35 +52,37 @@ class CommonSegment extends Container {
       height: height ?? 51.h,
       color: Colors.white,
       child: ListView.builder(
-        padding: EdgeInsets.only(left: paddingLeft ?? 10.w),
-        itemCount: titleList.length,
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              if (callBack != null) {
-                callBack!(index);
-              }
-            },
-            child: Container(
-              margin: EdgeInsets.only(right: paddingRight ?? 10.w),
-              width: itemWidth ?? 118.w,
-              height: itemHeight ?? 39.h,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(radius ?? 6.h),
-                color: titleList[index].select ? selectBackColor : normalBackColor
-              ),
-              child: Text(
-                titleList[index].title,
-                style: TextStyle(
-                  fontSize: fontSize ?? 16.sp,
-                  color: titleList[index].select ? selectColor : normalColor
+          padding: EdgeInsets.only(left: paddingLeft ?? 10.w),
+          itemCount: titleList.length,
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (context, index) {
+            return GestureDetector(
+              onTap: () {
+                if (_selectIndex == index) return;
+                _selectIndex = index;
+                if (callBack != null) {
+                  callBack!(index);
+                }
+              },
+              child: Container(
+                margin: EdgeInsets.only(right: paddingRight ?? 10.w),
+                width: itemWidth ?? 118.w,
+                height: itemHeight ?? 39.h,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(radius ?? 6.h),
+                    color: titleList[index].select ? selectBackColor : normalBackColor
+                ),
+                child: Text(
+                  titleList[index].title,
+                  style: TextStyle(
+                      fontSize: fontSize ?? 16.sp,
+                      color: titleList[index].select ? selectColor : normalColor
+                  ),
                 ),
               ),
-            ),
-          );
-        }
+            );
+          }
       ),
     );
   }

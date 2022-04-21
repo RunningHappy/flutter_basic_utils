@@ -25,7 +25,7 @@ class AssemblyDuration {
   static const Duration long = Duration(seconds: 3);
 }
 
-/// 通用的Toast组件
+/// 通用的 Toast 组件
 class EnumToast {
   /// Toast 距离顶部默认间距
   static const int _defaultTopOffset = 50;
@@ -36,11 +36,11 @@ class EnumToast {
   /// _ToastView
   static _ToastView? preToastView;
 
-  /// 显示在中间。如不设置duration则会自动根据内容长度来计算（更友好，最长5秒）
+  /// 显示在中间。如不设置 duration 则会自动根据内容长度来计算（更友好，最长 5 秒）
   static void showInCenter(
       {required String text,
-        required BuildContext context,
-        Duration? duration}) {
+      required BuildContext context,
+      Duration? duration}) {
     show(
       text,
       context,
@@ -49,19 +49,19 @@ class EnumToast {
     );
   }
 
-  /// 显示Toast，如不设置duration则会自动根据内容长度来计算（更友好，最长5秒）
+  /// 显示 Toast，如不设置 duration 则会自动根据内容长度来计算（更友好，最长 5 秒）
   static void show(
-      String text,
-      BuildContext context, {
-        Duration? duration,
-        Color? background,
-        TextStyle textStyle = const TextStyle(fontSize: 16, color: Colors.white),
-        double? radius,
-        Image? preIcon,
-        double? verticalOffset,
-        VoidCallback? onDismiss,
-        ToastGravity? gravity,
-      }) {
+    String text,
+    BuildContext context, {
+    Duration? duration,
+    Color? background,
+    TextStyle textStyle = const TextStyle(fontSize: 16, color: Colors.white),
+    double? radius,
+    Image? preIcon,
+    double? verticalOffset,
+    VoidCallback? onDismiss,
+    ToastGravity? gravity,
+  }) {
     final OverlayState? overlayState = Overlay.of(context);
     if (overlayState == null) return;
 
@@ -93,7 +93,7 @@ class EnumToast {
       },
     );
     final _ToastView toastView =
-    _ToastView(overlayState: overlayState, overlayEntry: overlayEntry);
+        _ToastView(overlayState: overlayState, overlayEntry: overlayEntry);
     preToastView = toastView;
     toastView._show(
       duration: finalDuration,
@@ -244,7 +244,7 @@ class _ToastWidget extends StatelessWidget {
 
   final Widget widget;
 
-  /// 使用IgnorePointer，方便手势透传过去
+  /// 使用 IgnorePointer，方便手势透传过去
   @override
   Widget build(BuildContext context) {
     return IgnorePointer(

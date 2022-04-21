@@ -54,6 +54,8 @@ export 'src/utils/regex_util.dart';
 export 'src/utils/object_util.dart';
 // 银行卡号每隔4位加空格，每隔3三位加逗号，隐藏手机号等等.
 export 'src/utils/text_util.dart';
+// 文件操作类 - txt缓存文件读写
+export 'src/utils/io_util.dart';
 
 
 
@@ -77,7 +79,7 @@ export 'src/widgets/appbar/hq_app_bar.dart';
 export 'src/widgets/appbar/custom_appbar.dart';
 export 'src/widgets/appbar/custom_switch_appbar.dart';
 // 按钮
-export 'src/widgets/button/common_gradient_btn.dart';
+export 'src/widgets/button/common_gradient_button.dart';
 export 'src/widgets/button/lsj_button.dart';
 export 'src/widgets/button/button_common.dart';
 export 'src/widgets/button/button_login.dart';
@@ -94,8 +96,8 @@ export 'src/widgets/button/button_loading.dart';
 export 'src/widgets/button/button_gradient.dart';
 export 'src/widgets/button/ios_back_button.dart';
 export 'src/widgets/button/cycle_button.dart';
-export 'src/widgets/button/common_water_btn.dart';
-export 'src/widgets/button/common_draggle_btn.dart';
+export 'src/widgets/button/common_water_button.dart';
+export 'src/widgets/button/common_draggle_button.dart';
 // 表单-输入框
 export 'src/widgets/form/common_textfiled.dart';
 export 'src/widgets/form/text_area.dart';
@@ -124,6 +126,12 @@ export 'src/widgets/cell/marquee.dart';
 export 'src/widgets/cell/rate_star.dart';
 export 'src/widgets/cell/steps_bar.dart';
 export 'src/widgets/cell/stepper_num.dart';
+export 'src/widgets/cell/common_end_line.dart';
+export 'src/widgets/cell/slide_view.dart';
+export 'src/widgets/cell/slide_view_indicator.dart';
+export 'src/widgets/cell/circle_image.dart';
+export 'src/widgets/cell/common_header.dart';
+export 'src/widgets/cell/animal_photo.dart';
 // 选择框
 export 'src/widgets/select_box/radio_box.dart';
 export 'src/widgets/select_box/check_box.dart';
@@ -131,6 +139,7 @@ export 'src/widgets/select_box/check_box.dart';
 export 'src/widgets/error_widget.dart';
 // 成功 toast
 export 'src/widgets/toast/toast_success.dart';
+export 'src/widgets/toast/hq_loading.dart';
 // 多位置toast
 export 'src/widgets/toast/toast_enum_gravity.dart';
 // 日期/时间选择器
@@ -153,8 +162,19 @@ export 'src/widgets/uppanel/common_circle_progress_indicator.dart';
 export 'src/widgets/uppanel/bubbletext/bubble_text.dart';
 //城市选择
 export 'src/widgets/uppanel/city_select/city_select.dart';
+export 'src/widgets/uppanel/city_select/city_model.dart';
 //带箭头气泡提示
 export 'src/widgets/uppanel/popupwindow/pop_up_window.dart';
+//折线图
+export 'src/widgets/uppanel/charts/brokenlines/broken_line.dart';
+export 'src/widgets/uppanel/charts/brokenlines/line_painter.dart';
+export 'src/widgets/uppanel/charts/brokenlines/line_y_painter.dart';
+export 'src/widgets/uppanel/charts/brokenlines/line_data.dart';
+//雷达图
+export 'src/widgets/uppanel/charts/radar_charts/radar_charts.dart';
+//饼状图
+export 'src/widgets/uppanel/charts/doughnut_charts/doughnut_charts.dart';
+export 'src/widgets/uppanel/charts/doughnut_charts/doughnut_charts_legend.dart';
 //banner
 export 'src/widgets/banner/common_banner.dart';
 export 'src/widgets/banner/common_segment.dart';

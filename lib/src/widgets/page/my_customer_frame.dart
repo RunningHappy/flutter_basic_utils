@@ -136,7 +136,8 @@ class _MyCustomerFrameState extends State<MyCustomerFrame>
                 child: Container(
                   padding:
                       EdgeInsets.symmetric(horizontal: 29.w, vertical: 28.w),
-                  child: Icon(Icons.arrow_back_ios, size: 43.h, color: Colors.black),
+                  child: Icon(Icons.arrow_back_ios,
+                      size: 43.h, color: Colors.black),
                 ),
               )),
           body: PageView.builder(
@@ -160,10 +161,8 @@ class _MyCustomerFrameState extends State<MyCustomerFrame>
       return Container(
         width: 165.w,
         alignment: Alignment.center,
-        child: Text(
-          element,
-          style: TextStyle(color: const Color(0xFF606972), fontSize: 29.sp)
-        ),
+        child: Text(element,
+            style: TextStyle(color: const Color(0xFF606972), fontSize: 29.sp)),
       );
     }).toList();
   }

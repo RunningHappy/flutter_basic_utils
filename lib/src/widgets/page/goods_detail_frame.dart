@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
+///
 /// 商品详情框架（布局导航栏放TabBar（商品、评价、详情），
 /// 点击tab，内容页ScrollView滚动到指定位置）
+///
 class GoodsDetailFrame extends StatefulWidget {
   const GoodsDetailFrame({Key? key}) : super(key: key);
 
@@ -95,23 +97,25 @@ class _GoodsDetailFrameState extends State<GoodsDetailFrame>
     var webViewBox = Container(
       color: Colors.white,
       child: Html(
-        // 渲染的数据
-        data: '<html><p><span><img alt="" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.huabanimg.com%2F790a691e3e20d378fafc1e6bf7351d350ee90fc63aa6ae-7ACydT_fw658&refer=http%3A%2F%2Fhbimg.huabanimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645067218&t=ea9e2efc369e2cb85d8334868bd30c57" style="max-width:100%border:0" /></span></span></p></html>',
-        // 自定义样式
-        style: {},
-        customRender: {
-          "flutter": (RenderContext context, Widget widget) {
-            return FlutterLogo(
-              style: (context.tree.attributes['horizontal'] != null) ? FlutterLogoStyle.horizontal : FlutterLogoStyle.markOnly,
-              textColor: context.style.color as Color,
-              size: context.style.fontSize!.size! * 5,
-            );
-          }
-        },
-        onImageError: (Object exception, StackTrace? stackTrace) {
-          debugPrint(exception.toString());
-        }
-      ),
+          // 渲染的数据
+          data:
+              '<html><p><span><img alt="" src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fhbimg.huabanimg.com%2F790a691e3e20d378fafc1e6bf7351d350ee90fc63aa6ae-7ACydT_fw658&refer=http%3A%2F%2Fhbimg.huabanimg.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645067218&t=ea9e2efc369e2cb85d8334868bd30c57" style="max-width:100%border:0" /></span></span></p></html>',
+          // 自定义样式
+          style: {},
+          customRender: {
+            "flutter": (RenderContext context, Widget widget) {
+              return FlutterLogo(
+                style: (context.tree.attributes['horizontal'] != null)
+                    ? FlutterLogoStyle.horizontal
+                    : FlutterLogoStyle.markOnly,
+                textColor: context.style.color as Color,
+                size: context.style.fontSize!.size! * 5,
+              );
+            }
+          },
+          onImageError: (Object exception, StackTrace? stackTrace) {
+            debugPrint(exception.toString());
+          }),
     );
     var bodyBox = Column(
       children: [

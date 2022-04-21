@@ -5,7 +5,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:app_assembly/src/widgets/pop_alert/basic_bottom_sheet.dart'
     as custom_bottom_sheet;
 
+///
 /// 底部弹出评论sheet（包含头像、昵称、内容、时间）
+///
 class CommentBottomSheet extends Dialog {
   const CommentBottomSheet({
     Key? key,

@@ -8,6 +8,7 @@ class CommonButton extends StatelessWidget {
   final double h;
   final String buttonName;
   final VoidCallback onPressed;
+  final double? fontSize;
 
   const CommonButton({
     Key? key,
@@ -15,6 +16,7 @@ class CommonButton extends StatelessWidget {
     required this.buttonName,
     required this.h,
     required this.onPressed,
+    this.fontSize
   }) : super(key: key);
 
   @override
@@ -27,13 +29,13 @@ class CommonButton extends StatelessWidget {
         elevation: 0,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.all(Radius.circular(h))),
-        disabledColor: Colors.blue,
+        disabledColor: Colors.blueAccent.withOpacity(.5),
         color: Colors.blueAccent,
         child: Text(buttonName,
             style: TextStyle(
-                color: isDisable ? Colors.white : Colors.black,
+                color: isDisable ? Colors.white : Colors.grey,
                 fontWeight: FontWeight.w400,
-                fontSize: 32.sp)),
+                fontSize: fontSize??32.sp)),
         onPressed: isDisable ? onPressed : null,
       ),
     );

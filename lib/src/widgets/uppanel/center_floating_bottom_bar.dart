@@ -7,7 +7,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 ///
-/// 底部tabBar
+/// 底部悬浮中心按钮的TabBar框架
 ///
 class CenterFloatingBottomBar extends StatefulWidget {
   final List<Widget> pageList;
@@ -21,32 +21,35 @@ class CenterFloatingBottomBar extends StatefulWidget {
   final double? activeTitleSize;
   final FontWeight? normalFontWeight;
   final FontWeight? activeFontWeight;
-  final double? barHeight;
+  final double barHeight;
   final double? imageTitlePadding;
   final double? imageWidth;
   final Color? barBackColor;
+  final Function? centerCallback;
 
   const CenterFloatingBottomBar(
-    {Key? key,
-    required this.pageList,
-    required this.centerImage,
-    required this.normalBarImage,
-    required this.activeBarImage,
-    this.barTitleList,
-    this.normalTitleColor,
-    this.activeTitleColor,
-    this.normalTitleSize,
-    this.activeFontWeight,
-    this.activeTitleSize,
-    this.normalFontWeight,
-    this.barHeight,
-    this.imageTitlePadding,
-    this.imageWidth,
-    this.barBackColor})
-    : super(key: key);
+      {Key? key,
+        required this.pageList,
+        this.centerImage = "",
+        required this.normalBarImage,
+        required this.activeBarImage,
+        this.barTitleList,
+        this.normalTitleColor,
+        this.activeTitleColor,
+        this.normalTitleSize,
+        this.activeFontWeight,
+        this.activeTitleSize,
+        this.normalFontWeight,
+        required this.barHeight,
+        this.imageTitlePadding,
+        this.imageWidth,
+        this.barBackColor,
+        this.centerCallback})
+      : super(key: key);
 
   @override
-  _CenterFloatingBottomBarState createState() => _CenterFloatingBottomBarState();
+  _CenterFloatingBottomBarState createState() =>
+      _CenterFloatingBottomBarState();
 }
 
 class _CenterFloatingBottomBarState extends State<CenterFloatingBottomBar> {
@@ -71,7 +74,8 @@ class _CenterFloatingBottomBarState extends State<CenterFloatingBottomBar> {
   }
 
   Future<bool> onWillPop() async {
-    if (_lastPopTime == null || DateTime.now().difference(_lastPopTime!) > const Duration(seconds: 2)) {
+    if (_lastPopTime == null ||
+        DateTime.now().difference(_lastPopTime!) > const Duration(seconds: 2)) {
       _lastPopTime = DateTime.now();
       EasyLoading.showToast('再按一次退出');
     } else {
@@ -91,13 +95,19 @@ class _CenterFloatingBottomBarState extends State<CenterFloatingBottomBar> {
       body: _pageList[_currentIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        child: Image.asset(
+        child: widget.centerImage.isEmpty
+            ? const Icon(Icons.add)
+            : Image.asset(
           widget.centerImage,
         ),
-        onPressed: () {},
+        onPressed: () {
+          if (widget.centerCallback != null) {
+            widget.centerCallback!.call();
+          }
+        },
       ),
       bottomNavigationBar: Container(
-        height: widget.barHeight ?? 65.h,
+        height: widget.barHeight,
         color: Colors.transparent,
         child: BottomAppBar(
           shape: const CircularNotchedRectangle(),
@@ -125,47 +135,59 @@ class _CenterFloatingBottomBarState extends State<CenterFloatingBottomBar> {
 
   buildBarItem(int? index, int? selectIndex) {
     return Expanded(
-      child: GestureDetector(
-        onTap: () {
-          setState(() {
-            _currentIndex = index!;
-          });
-        },
-        child: index! == -1 ? Container() : Container(
-          color: Colors.transparent,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Image.asset(
-                selectIndex == index ? widget.activeBarImage[index] : widget.normalBarImage[index],
-                width: widget.imageWidth ?? 24.h,
-                height: widget.imageWidth ?? 24.h,
-              ),
-              widget.barTitleList != null ? widget.barTitleList!.isNotEmpty ? Column(
-                children: [
-                  SizedBox(
-                    height: widget.imageTitlePadding ?? 5.h,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        widget.barTitleList![index],
-                        style: TextStyle(
-                          fontSize: selectIndex == index ? widget.activeTitleSize : widget.normalTitleSize,
-                          color: selectIndex == index ? widget.activeTitleColor : widget.normalTitleColor,
-                          fontWeight: selectIndex == index ? widget.activeFontWeight : widget.normalFontWeight
-                        ),
-                      )
-                    ],
-                  )
-                ],
-              ) : Container() : Container()
-            ],
+        child: GestureDetector(
+          onTap: () {
+            setState(() {
+              _currentIndex = index!;
+            });
+          },
+          child: index! == -1
+              ? Container()
+              : Container(
+            color: Colors.transparent,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Image.asset(
+                  selectIndex == index
+                      ? widget.activeBarImage[index]
+                      : widget.normalBarImage[index],
+                  width: widget.imageWidth ?? 30.h,
+                  height: widget.imageWidth ?? 30.h,
+                ),
+                widget.barTitleList != null
+                    ? widget.barTitleList!.isNotEmpty
+                    ? Column(
+                  children: [
+                    SizedBox(
+                      height: widget.imageTitlePadding ?? 5.h,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.barTitleList![index],
+                          style: TextStyle(
+                              fontSize: selectIndex == index
+                                  ? widget.activeTitleSize
+                                  : widget.normalTitleSize,
+                              color: selectIndex == index
+                                  ? widget.activeTitleColor
+                                  : widget.normalTitleColor,
+                              fontWeight: selectIndex == index
+                                  ? widget.activeFontWeight
+                                  : widget.normalFontWeight),
+                        )
+                      ],
+                    )
+                  ],
+                )
+                    : Container()
+                    : Container()
+              ],
+            ),
           ),
-        ),
-      )
-    );
+        ));
   }
 }

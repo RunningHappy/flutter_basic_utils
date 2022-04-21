@@ -30,10 +30,10 @@ typedef TextExpandedCallback = Function(bool);
 ///  * [InsertInfo], 气泡背景的文本组件
 ///
 class ExpandableText extends StatefulWidget {
-  ///显示的文本
+  /// 显示的文本
   final String text;
 
-  ///显示的最多行数
+  /// 显示的最多行数
   final int? maxLines;
 
   /// 文本的样式
@@ -53,15 +53,16 @@ class ExpandableText extends StatefulWidget {
 
   const ExpandableText(
       {Key? key,
-        required this.text,
-        this.maxLines = 1000000,
-        this.textStyle,
-        this.onExpanded,
-        this.color,
-        this.btnTitleColor,
-        this.textColor})
+      required this.text,
+      this.maxLines = 1000000,
+      this.textStyle,
+      this.onExpanded,
+      this.color,
+      this.btnTitleColor,
+      this.textColor})
       : super(key: key);
 
+  @override
   _ExpandableTextState createState() => _ExpandableTextState();
 }
 
@@ -81,7 +82,7 @@ class _ExpandableTextState extends State<ExpandableText> {
             ellipsis: 'EllipseText');
         tp.layout(maxWidth: size.maxWidth);
         if (tp.didExceedMaxLines) {
-          if (this._expanded) {
+          if (_expanded) {
             return _expandedText(context, widget.text);
           } else {
             return _foldedText(context, widget.text);
@@ -116,20 +117,19 @@ class _ExpandableTextState extends State<ExpandableText> {
 
     Text tx = Text(
       '更多',
-      style: TextStyle(
-          color: widget.btnTitleColor??Colors.black,
-          fontSize: 14),
+      style:
+          TextStyle(color: widget.btnTitleColor ?? Colors.black, fontSize: 14),
     );
     Container cnt = Container(
-      padding: EdgeInsets.only(left: 22),
+      padding: const EdgeInsets.only(left: 22),
       alignment: Alignment.centerRight,
       child: tx,
       decoration: BoxDecoration(
           gradient: LinearGradient(
-            colors: [btnColor.withAlpha(100), btnColor, btnColor],
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-          )),
+        colors: [btnColor.withAlpha(100), btnColor, btnColor],
+        begin: Alignment.centerLeft,
+        end: Alignment.centerRight,
+      )),
     );
     return GestureDetector(
       child: cnt,
@@ -157,7 +157,7 @@ class _ExpandableTextState extends State<ExpandableText> {
         TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w400,
-          color: widget.textColor??Colors.black,
+          color: widget.textColor ?? Colors.black,
         );
     return style;
   }

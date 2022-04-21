@@ -65,25 +65,25 @@ class PopupWindow extends StatefulWidget {
   /// 自动将 popWindow 在 targetView 上面弹出
   final double turnOverFromBottom;
 
-  PopupWindow(this.context,
+  const PopupWindow(this.context,
       {Key? key,
-        this.text,
-        required this.popKey,
-        this.arrowHeight = 6.0,
-        this.textStyle,
-        this.backgroundColor,
-        this.isShowCloseIcon = false,
-        this.offset = 0,
-        this.popDirection = PopupDirection.bottom,
-        this.widget,
-        this.paddingInsets =
-        const EdgeInsets.only(left: 18, top: 14, right: 18, bottom: 14),
-        this.borderRadius = 4,
-        this.borderColor,
-        this.canWrap = false,
-        this.spaceMargin = 20,
-        this.arrowOffset,
-        this.turnOverFromBottom = 50.0})
+      this.text,
+      required this.popKey,
+      this.arrowHeight = 6.0,
+      this.textStyle,
+      this.backgroundColor,
+      this.isShowCloseIcon = false,
+      this.offset = 0,
+      this.popDirection = PopupDirection.bottom,
+      this.widget,
+      this.paddingInsets =
+          const EdgeInsets.only(left: 18, top: 14, right: 18, bottom: 14),
+      this.borderRadius = 4,
+      this.borderColor,
+      this.canWrap = false,
+      this.spaceMargin = 20,
+      this.arrowOffset,
+      this.turnOverFromBottom = 50.0})
       : super(key: key);
 
   /// 显示 popUpWindow
@@ -107,23 +107,23 @@ class PopupWindow extends StatefulWidget {
   /// [turnOverFromBottom] popWindow 小于此值的时候，自动将 popWindow 在 targetView 上面弹出，默认 50
   static void showPopWindow(context, String? text, GlobalKey popKey,
       {PopupDirection popDirection = PopupDirection.bottom,
-        double arrowHeight = 6.0,
-        TextStyle? textStyle =
-        const TextStyle(fontSize: 16, color: Color(0xFFFFFFFF)),
-        Color? backgroundColor = const Color(0xFF1A1A1A),
-        bool hasCloseIcon = false,
-        double offset = 0,
-        Widget? widget,
-        EdgeInsets paddingInsets =
-        const EdgeInsets.only(left: 18, top: 14, right: 18, bottom: 14),
-        double borderRadius = 8,
-        Color? borderColor = Colors.transparent,
-        double borderWidth = 1,
-        bool canWrap = false,
-        double spaceMargin = 20,
-        double? arrowOffset,
-        VoidCallback? dismissCallback,
-        double turnOverFromBottom = 50.0}) {
+      double arrowHeight = 6.0,
+      TextStyle? textStyle =
+          const TextStyle(fontSize: 16, color: Color(0xFFFFFFFF)),
+      Color? backgroundColor = const Color(0xFF1A1A1A),
+      bool hasCloseIcon = false,
+      double offset = 0,
+      Widget? widget,
+      EdgeInsets paddingInsets =
+          const EdgeInsets.only(left: 18, top: 14, right: 18, bottom: 14),
+      double borderRadius = 8,
+      Color? borderColor = Colors.transparent,
+      double borderWidth = 1,
+      bool canWrap = false,
+      double spaceMargin = 20,
+      double? arrowOffset,
+      VoidCallback? dismissCallback,
+      double turnOverFromBottom = 50.0}) {
     assert(popKey.currentContext != null &&
         popKey.currentContext!.findRenderObject() != null);
     if (popKey.currentContext == null ||
@@ -132,24 +132,24 @@ class PopupWindow extends StatefulWidget {
         context,
         PopupRouter(
             child: PopupWindow(
-              context,
-              arrowHeight: arrowHeight,
-              text: text,
-              popKey: popKey,
-              textStyle: textStyle,
-              backgroundColor: backgroundColor,
-              isShowCloseIcon: hasCloseIcon,
-              offset: offset,
-              popDirection: popDirection,
-              widget: widget,
-              paddingInsets: paddingInsets,
-              borderRadius: borderRadius,
-              borderColor: borderColor ?? Colors.transparent,
-              canWrap: canWrap,
-              spaceMargin: spaceMargin,
-              arrowOffset: arrowOffset,
-              turnOverFromBottom: turnOverFromBottom,
-            )));
+          context,
+          arrowHeight: arrowHeight,
+          text: text,
+          popKey: popKey,
+          textStyle: textStyle,
+          backgroundColor: backgroundColor,
+          isShowCloseIcon: hasCloseIcon,
+          offset: offset,
+          popDirection: popDirection,
+          widget: widget,
+          paddingInsets: paddingInsets,
+          borderRadius: borderRadius,
+          borderColor: borderColor ?? Colors.transparent,
+          canWrap: canWrap,
+          spaceMargin: spaceMargin,
+          arrowOffset: arrowOffset,
+          turnOverFromBottom: turnOverFromBottom,
+        )));
   }
 
   @override
@@ -164,7 +164,7 @@ class _PopupWindowState extends State<PopupWindow> {
   late Size _screenSize;
 
   /// 箭头和左右侧边线间距
-  double _arrowSpacing = 18;
+  final double _arrowSpacing = 18;
 
   /// 是否向右侧延伸，true：向右侧延伸，false：向左侧延伸
   bool _expandedRight = true;
@@ -187,8 +187,8 @@ class _PopupWindowState extends State<PopupWindow> {
   @override
   void initState() {
     super.initState();
-    this._showRect = _getWidgetGlobalRect(widget.popKey);
-    this._screenSize = window.physicalSize / window.devicePixelRatio;
+    _showRect = _getWidgetGlobalRect(widget.popKey);
+    _screenSize = window.physicalSize / window.devicePixelRatio;
     _borderColor = (widget.borderColor ?? Colors.transparent).withAlpha(255);
     _backgroundColor =
         (widget.backgroundColor ?? Colors.transparent).withAlpha(255);
@@ -196,7 +196,7 @@ class _PopupWindowState extends State<PopupWindow> {
     _calculateOffset();
   }
 
-  // 获取targetView的位置
+  // 获取 targetView 的位置
   Rect _getWidgetGlobalRect(GlobalKey key) {
     try {
       BuildContext? ctx = key.currentContext;
@@ -211,26 +211,26 @@ class _PopupWindowState extends State<PopupWindow> {
     }
   }
 
-  // 计算popUpWindow显示的位置
+  // 计算 popUpWindow 显示的位置
   void _calculateOffset() {
     if (_showRect.center.dx < _screenSize.width / 2) {
-      // popUpWindow向右侧延伸
+      // popUpWindow 向右侧延伸
       _expandedRight = true;
       _left = _showRect.left;
     } else {
-      // popUpWindow向左侧延伸
+      // popUpWindow 向左侧延伸
       _expandedRight = false;
       _right = _screenSize.width - _showRect.right + widget.spaceMargin;
     }
     if (_popDirection == PopupDirection.bottom) {
-      // 在targetView下方
+      // 在 targetView 下方
       _top = _showRect.height + _showRect.top + widget.offset;
       if ((_screenSize.height - _top) < widget.turnOverFromBottom) {
         _popDirection = PopupDirection.top;
         _bottom = _screenSize.height - _showRect.top + widget.offset;
       }
     } else if (_popDirection == PopupDirection.top) {
-      // 在targetView上方
+      // 在 targetView 上方
       _bottom = _screenSize.height - _showRect.top + widget.offset;
     }
   }
@@ -266,46 +266,46 @@ class _PopupWindowState extends State<PopupWindow> {
   Widget _buildArrowWidget() {
     return _expandedRight
         ? Positioned(
-      left: widget.arrowOffset ??
-          _left +
-              (_showRect.width - _arrowSpacing) / 2 -
-              widget.spaceMargin,
-      top: _popDirection == PopupDirection.bottom
-          ? _top - widget.arrowHeight
-          : null,
-      bottom: _popDirection == PopupDirection.top
-          ? _bottom - widget.arrowHeight
-          : null,
-      child: CustomPaint(
-        size: Size(15.0, widget.arrowHeight),
-        painter: _TrianglePainter(
-            isDownArrow: _popDirection == PopupDirection.top,
-            color: _backgroundColor,
-            borderColor: _borderColor),
-      ),
-    )
+            left: widget.arrowOffset ??
+                _left +
+                    (_showRect.width - _arrowSpacing) / 2 -
+                    widget.spaceMargin,
+            top: _popDirection == PopupDirection.bottom
+                ? _top - widget.arrowHeight
+                : null,
+            bottom: _popDirection == PopupDirection.top
+                ? _bottom - widget.arrowHeight
+                : null,
+            child: CustomPaint(
+              size: Size(15.0, widget.arrowHeight),
+              painter: _TrianglePainter(
+                  isDownArrow: _popDirection == PopupDirection.top,
+                  color: _backgroundColor,
+                  borderColor: _borderColor),
+            ),
+          )
         : Positioned(
-      right: widget.arrowOffset ??
-          _right +
-              (_showRect.width - _arrowSpacing) / 2 -
-              widget.spaceMargin,
-      top: _popDirection == PopupDirection.bottom
-          ? _top - widget.arrowHeight
-          : null,
-      bottom: _popDirection == PopupDirection.top
-          ? _bottom - widget.arrowHeight
-          : null,
-      child: CustomPaint(
-        size: Size(15.0, widget.arrowHeight),
-        painter: _TrianglePainter(
-            isDownArrow: _popDirection == PopupDirection.top,
-            color: _backgroundColor,
-            borderColor: _borderColor),
-      ),
-    );
+            right: widget.arrowOffset ??
+                _right +
+                    (_showRect.width - _arrowSpacing) / 2 -
+                    widget.spaceMargin,
+            top: _popDirection == PopupDirection.bottom
+                ? _top - widget.arrowHeight
+                : null,
+            bottom: _popDirection == PopupDirection.top
+                ? _bottom - widget.arrowHeight
+                : null,
+            child: CustomPaint(
+              size: Size(15.0, widget.arrowHeight),
+              painter: _TrianglePainter(
+                  isDownArrow: _popDirection == PopupDirection.top,
+                  color: _backgroundColor,
+                  borderColor: _borderColor),
+            ),
+          );
   }
 
-  // popWindow的弹出样式
+  // popWindow 的弹出样式
   Widget _buildPopWidget() {
     // 状态栏高度
     double statusBarHeight = MediaQueryData.fromWindow(window).padding.top;
@@ -327,49 +327,50 @@ class _PopupWindowState extends State<PopupWindow> {
                 maxHeight: _popDirection == PopupDirection.bottom
                     ? _screenSize.height - _top
                     : _screenSize.height - _bottom - statusBarHeight),
-            child: widget.widget == null
-                ? SingleChildScrollView(
-                child: widget.canWrap
-                    ? RichText(
-                    text: TextSpan(children: <InlineSpan>[
-                      TextSpan(
-                          text: widget.text, style: widget.textStyle),
-                      widget.isShowCloseIcon
-                          ? WidgetSpan(
-                          alignment: PlaceholderAlignment.middle,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 6),
-                            child: Image.asset(
-                              'assets/icon_popup_close.png',
-                              scale: 3.0,
-                            ),
-                          ))
-                          : TextSpan(text: "")
-                    ]))
-                    : Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    Flexible(
-                      fit: FlexFit.loose,
-                      child: Text(
-                        widget.text ?? '',
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: widget.textStyle,
-                      ),
-                    ),
-                    widget.isShowCloseIcon
-                        ? Padding(
-                      padding: EdgeInsets.only(left: 6),
-                      child: Image.asset(
-                        'assets/icon_popup_close.png',
-                        scale: 3.0,
-                      ),
-                    )
-                        : Text("")
-                  ],
-                ))
-                : widget.widget));
+            child: widget.widget ??
+                SingleChildScrollView(
+                    child: widget.canWrap
+                        ? RichText(
+                            text: TextSpan(children: <InlineSpan>[
+                            TextSpan(
+                                text: widget.text, style: widget.textStyle),
+                            widget.isShowCloseIcon
+                                ? WidgetSpan(
+                                    alignment: PlaceholderAlignment.middle,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 6),
+                                      child: Image.asset(
+                                        'assets/icon_popup_close.png',
+                                        package: 'app_assembly',
+                                        scale: 3.0,
+                                      ),
+                                    ))
+                                : const TextSpan(text: "")
+                          ]))
+                        : Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: <Widget>[
+                              Flexible(
+                                fit: FlexFit.loose,
+                                child: Text(
+                                  widget.text ?? '',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: widget.textStyle,
+                                ),
+                              ),
+                              widget.isShowCloseIcon
+                                  ? Padding(
+                                      padding: const EdgeInsets.only(left: 6),
+                                      child: Image.asset(
+                                        'assets/icon_popup_close.png',
+                                        package: 'app_assembly',
+                                        scale: 3.0,
+                                      ),
+                                    )
+                                  : const Text("")
+                            ],
+                          ))));
   }
 }
 
@@ -430,7 +431,7 @@ class _TrianglePainter extends CustomPainter {
 }
 
 class PopupRouter extends PopupRoute {
-  final Duration _duration = Duration(milliseconds: 200);
+  final Duration _duration = const Duration(milliseconds: 200);
   Widget child;
 
   PopupRouter({required this.child});
@@ -476,18 +477,18 @@ class PopupListWindow {
   /// [onItemClickInterceptor] item 点击拦截回调
   /// [onDismiss] popUpWindow消失回调
   static void showButtonPanelPopList(
-      context,
-      GlobalKey popKey, {
-        List<String>? data,
-        PopupDirection popDirection = PopupDirection.bottom,
-        PopupListItemBuilder? itemBuilder,
-        PopupListItemClick? onItemClick,
-        VoidCallback? onDismiss,
-      }) {
-    TextStyle textStyle = TextStyle(
-        color: const Color(0xFF222222), fontSize: 16);
+    context,
+    GlobalKey popKey, {
+    List<String>? data,
+    PopupDirection popDirection = PopupDirection.bottom,
+    PopupListItemBuilder? itemBuilder,
+    PopupListItemClick? onItemClick,
+    VoidCallback? onDismiss,
+  }) {
+    TextStyle textStyle =
+        const TextStyle(color: Color(0xFF222222), fontSize: 16);
     double arrowHeight = 6.0;
-    Color borderColor = Color(0xffCCCCCC);
+    Color borderColor = const Color(0xffCCCCCC);
     Color backgroundColor = Colors.white;
     double offset = 4;
     double spaceMargin = -10;
@@ -496,47 +497,51 @@ class PopupListWindow {
     double maxHeight = 200;
     double borderRadius = 4;
     bool hasCloseIcon = true;
-    assert(popKey.currentContext != null && popKey.currentContext!.findRenderObject() != null);
-    if (popKey.currentContext == null || popKey.currentContext!.findRenderObject() == null) return;
+    assert(popKey.currentContext != null &&
+        popKey.currentContext!.findRenderObject() != null);
+    if (popKey.currentContext == null ||
+        popKey.currentContext!.findRenderObject() == null) return;
     Navigator.push(
         context,
         PopupRouter(
             child: PopupWindow(
-              context,
-              arrowHeight: arrowHeight,
-              popKey: popKey,
-              textStyle: textStyle,
-              backgroundColor: backgroundColor,
-              isShowCloseIcon: hasCloseIcon,
-              offset: offset,
-              widget: isEmpty(data)
-                  ? Container(
-                constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
-              )
-                  : Container(
-                constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
-                child: SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.only(top: 6, bottom: 6),
-                    child: Column(
-                      children:
-                      _getItems(context, minWidth, maxWidth, itemBuilder, textStyle, data!,
-                              (index, item) {
-                            if (onItemClick != null) {
-                              bool isIntercept = onItemClick(index, item);
-                              if (isIntercept) return;
-                            }
-                            Navigator.pop(context, {'index': index, 'item': item});
-                          }),
+          context,
+          arrowHeight: arrowHeight,
+          popKey: popKey,
+          textStyle: textStyle,
+          backgroundColor: backgroundColor,
+          isShowCloseIcon: hasCloseIcon,
+          offset: offset,
+          widget: isEmpty(data)
+              ? Container(
+                  constraints:
+                      BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+                )
+              : Container(
+                  constraints:
+                      BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 6, bottom: 6),
+                      child: Column(
+                        children: _getItems(context, minWidth, maxWidth,
+                            itemBuilder, textStyle, data!, (index, item) {
+                          if (onItemClick != null) {
+                            bool isIntercept = onItemClick(index, item);
+                            if (isIntercept) return;
+                          }
+                          Navigator.pop(
+                              context, {'index': index, 'item': item});
+                        }),
+                      ),
                     ),
                   ),
                 ),
-              ),
-              popDirection: popDirection,
-              borderRadius: borderRadius,
-              borderColor: borderColor,
-              spaceMargin: spaceMargin,
-            ))).then((result) {
+          popDirection: popDirection,
+          borderRadius: borderRadius,
+          borderColor: borderColor,
+          spaceMargin: spaceMargin,
+        ))).then((result) {
       if (onDismiss != null) {
         onDismiss();
       }
@@ -553,12 +558,14 @@ class PopupListWindow {
   /// [onDismiss] popUpWindow消失回调
   static void showPopListWindow(context, GlobalKey popKey,
       {List<String>? data,
-        PopupDirection popDirection = PopupDirection.bottom,
-        double offset = 0,
-        PopupListItemClick? onItemClick,
-        VoidCallback? onDismiss}) {
-    assert(popKey.currentContext != null && popKey.currentContext!.findRenderObject() != null);
-    if (popKey.currentContext == null || popKey.currentContext!.findRenderObject() == null) return;
+      PopupDirection popDirection = PopupDirection.bottom,
+      double offset = 0,
+      PopupListItemClick? onItemClick,
+      VoidCallback? onDismiss}) {
+    assert(popKey.currentContext != null &&
+        popKey.currentContext!.findRenderObject() != null);
+    if (popKey.currentContext == null ||
+        popKey.currentContext!.findRenderObject() == null) return;
 
     double arrowHeight = 6.0;
     double borderRadius = 4;
@@ -569,8 +576,8 @@ class PopupListWindow {
     double? arrowOffset;
     Color borderColor = const Color(0xFFF0F0F0);
     Color backgroundColor = Colors.white;
-    TextStyle textStyle = TextStyle(
-        color: const Color(0xFF222222), fontSize: 14);
+    TextStyle textStyle =
+        const TextStyle(color: Color(0xFF222222), fontSize: 14);
     bool hasCloseIcon = true;
 
     Navigator.push(
@@ -587,26 +594,29 @@ class PopupListWindow {
           offset: offset,
           widget: isEmpty(data)
               ? Container(
-            constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
-          )
+                  constraints:
+                      BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+                )
               : Container(
-            constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
-            child: SingleChildScrollView(
-              child: Container(
-                padding: EdgeInsets.only(top: 6, bottom: 6),
-                child: Column(
-                  children: _getItems(context, minWidth, maxWidth, null, textStyle, data!,
-                          (index, item) {
-                        if (onItemClick != null) {
-                          bool isIntercept = onItemClick(index, item);
-                          if (isIntercept) return;
-                        }
-                        Navigator.pop(context);
-                      }),
+                  constraints:
+                      BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.only(top: 6, bottom: 6),
+                      child: Column(
+                        children: _getItems(
+                            context, minWidth, maxWidth, null, textStyle, data!,
+                            (index, item) {
+                          if (onItemClick != null) {
+                            bool isIntercept = onItemClick(index, item);
+                            if (isIntercept) return;
+                          }
+                          Navigator.pop(context);
+                        }),
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          ),
           popDirection: popDirection,
           borderRadius: borderRadius,
           borderColor: borderColor,
@@ -645,7 +655,8 @@ class PopupListWindow {
               width: textMaxWidth,
               alignment: Alignment.center,
               color: Colors.transparent,
-              padding: EdgeInsets.only(left: 26, right: 26, top: 6, bottom: 6),
+              padding:
+                  const EdgeInsets.only(left: 26, right: 26, top: 6, bottom: 6),
               child: _getTextWidget(itemBuilder, data, f, textStyle)));
     }).toList();
   }
@@ -700,14 +711,14 @@ class PopupListWindow {
       return obj.isEmpty;
     }
     if (obj is Map) {
-      return obj.length == 0;
+      return obj.isEmpty;
     }
     return obj == null;
   }
 
   /// 根据 TextStyle 计算 text 宽度。
   static Size textSize(String text, TextStyle style) {
-    if (isEmpty(text)) return Size(0, 0);
+    if (isEmpty(text)) return const Size(0, 0);
     final TextPainter textPainter = TextPainter(
       text: TextSpan(text: text, style: style),
       maxLines: 1,
@@ -716,4 +727,3 @@ class PopupListWindow {
     return textPainter.size;
   }
 }
-

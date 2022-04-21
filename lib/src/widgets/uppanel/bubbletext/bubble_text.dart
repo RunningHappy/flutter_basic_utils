@@ -29,13 +29,13 @@ class BubbleText extends StatelessWidget {
   /// 显示的文本
   final String text;
 
-  ///最多显示的行数
+  /// 最多显示的行数
   final int? maxLines;
 
-  ///展开收起回调
+  /// 展开收起回调
   final TextExpandedCallback? onExpanded;
 
-  /// 气泡的圆角 默认是4
+  /// 气泡的圆角 默认是 4
   final double radius;
 
   /// 气泡背景色  默认是 Color(0xFFF8F8F8)
@@ -46,18 +46,17 @@ class BubbleText extends StatelessWidget {
 
   const BubbleText(
       {Key? key,
-        this.text = '',
-        this.maxLines,
-        this.onExpanded,
-        this.radius = 4,
-        this.bgColor = const Color(0xFFF8F8F8),
-        this.textStyle})
+      this.text = '',
+      this.maxLines,
+      this.onExpanded,
+      this.radius = 4,
+      this.bgColor = const Color(0xFFF8F8F8),
+      this.textStyle})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Image image = getAssetImageWithColor(
-        'icon_right_top_pointer.png', bgColor);
+    Image image = getAssetImageWithColor('icon_right_top_pointer.png', bgColor);
     Widget bubbleText = Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -79,18 +78,20 @@ class BubbleText extends StatelessWidget {
                 color: bgColor,
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(0),
+                    topLeft: const Radius.circular(0),
                     topRight: Radius.circular(radius),
                     bottomLeft: Radius.circular(radius),
                     bottomRight: Radius.circular(radius))),
-            padding: EdgeInsets.only(left: 20, right: 20, top: 12, bottom: 12),
+            padding:
+                const EdgeInsets.only(left: 20, right: 20, top: 12, bottom: 12),
             child: ExpandableText(
               text: text,
               maxLines: maxLines,
               color: bgColor,
               onExpanded: onExpanded,
+              btnTitleColor: Colors.blueAccent,
               textStyle: textStyle ??
-                  TextStyle(
+                  const TextStyle(
                     fontWeight: FontWeight.w500,
                     fontSize: 14,
                     color: Colors.black,
@@ -109,10 +110,9 @@ class BubbleText extends StatelessWidget {
     }
     return Image.asset(
       assetFilePath,
+      package: 'app_assembly',
       color: color,
       scale: 3.0,
     );
   }
-
 }
-

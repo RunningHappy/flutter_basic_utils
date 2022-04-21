@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// IndexBar touch callback IndexModel.
-typedef void IndexBarTouchCallback(IndexBarDetails model);
+typedef IndexBarTouchCallback = void Function(IndexBarDetails model);
 
 /// IndexModel.
 class IndexBarDetails {
@@ -10,8 +10,8 @@ class IndexBarDetails {
   bool isTouchDown = false; //is touch down.
 }
 
-///Default Index data.
-const List<String> INDEX_DATA_DEF = const [
+/// Default Index data.
+const List<String> indexDataDefault = [
   "A",
   "B",
   "C",
@@ -43,18 +43,19 @@ const List<String> INDEX_DATA_DEF = const [
 
 /// IndexBar.
 class IndexBar extends StatefulWidget {
-  IndexBar(
+  const IndexBar(
       {Key? key,
-        this.data = INDEX_DATA_DEF,
-        required this.onTouch,
-        this.width = 30,
-        this.itemHeight = 16,
-        this.color = Colors.transparent,
-        this.textStyle =
-        const TextStyle(fontSize: 12.0, color: Color(0xFF101D37)),
-        this.touchDownColor = const Color(0xffeeeeee),
-        this.touchDownTextStyle =
-        const TextStyle(fontSize: 12.0, color: Colors.black)});
+      this.data = indexDataDefault,
+      required this.onTouch,
+      this.width = 30,
+      this.itemHeight = 16,
+      this.color = Colors.transparent,
+      this.textStyle =
+          const TextStyle(fontSize: 12.0, color: Color(0xFF101D37)),
+      this.touchDownColor = const Color(0xffeeeeee),
+      this.touchDownTextStyle =
+          const TextStyle(fontSize: 12.0, color: Colors.black)})
+      : super(key: key);
 
   /// index data.
   final List<String> data;
@@ -131,26 +132,26 @@ class _IndexBar extends StatefulWidget {
   /// Item touch callback.
   final IndexBarTouchCallback onTouch;
 
-  _IndexBar(
-      {Key? key,
-        this.data = INDEX_DATA_DEF,
-        required this.onTouch,
-        this.width = 30,
-        this.itemHeight = 16,
-        this.textStyle,
-        this.touchDownTextStyle})
-      : super(key: key);
+  const _IndexBar(
+    {Key? key,
+    this.data = indexDataDefault,
+    required this.onTouch,
+    this.width = 30,
+    this.itemHeight = 16,
+    this.textStyle,
+    this.touchDownTextStyle})
+    : super(key: key);
 
   @override
   _IndexBarState createState() => _IndexBarState();
 }
 
 class _IndexBarState extends State<_IndexBar> {
-  List<int> _indexSectionList = [];
+  final List<int> _indexSectionList = [];
   int _widgetTop = -1;
   int _lastIndex = 0;
   bool _widgetTopChange = false;
-  IndexBarDetails _indexModel = IndexBarDetails();
+  final IndexBarDetails _indexModel = IndexBarDetails();
 
   /// get index.
   int _getIndex(int offset) {
@@ -169,10 +170,10 @@ class _IndexBarState extends State<_IndexBar> {
     _indexSectionList.clear();
     _indexSectionList.add(0);
     int tempHeight = 0;
-    widget.data.forEach((value) {
+    for (var value in widget.data) {
       tempHeight = tempHeight + widget.itemHeight;
       _indexSectionList.add(tempHeight);
-    });
+    }
   }
 
   _triggerTouchEvent() {
@@ -188,13 +189,13 @@ class _IndexBarState extends State<_IndexBar> {
     _init();
 
     List<Widget> children = [];
-    widget.data.forEach((v) {
+    for (var v in widget.data) {
       children.add(SizedBox(
         width: widget.width.toDouble(),
         height: widget.itemHeight.toDouble(),
         child: Text(v, textAlign: TextAlign.center, style: _style),
       ));
-    });
+    }
 
     return GestureDetector(
       onVerticalDragDown: (DragDownDetails details) {

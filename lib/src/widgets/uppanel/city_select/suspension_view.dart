@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'az_common.dart';
 
 /// on all sus section callback(map: Used to scroll the list to the specified tag location).
-typedef void OnSusSectionCallBack(Map<String, int> map);
+typedef OnSusSectionCallBack = void Function(Map<String, int> map);
 
 ///Suspension Widget.Currently only supports fixed height items!
 class SuspensionView extends StatefulWidget {
@@ -32,7 +32,7 @@ class SuspensionView extends StatefulWidget {
 
   final AzListViewHeader? header;
 
-  SuspensionView({
+  const SuspensionView({
     Key? key,
     required this.data,
     required this.contentWidget,
@@ -54,8 +54,8 @@ class _SuspensionWidgetState extends State<SuspensionView> {
   int _lastIndex = -1;
   late int _suSectionListLength;
 
-  List<int> _suspensionSectionList = [];
-  Map<String, int> _suspensionSectionMap = Map();
+  final List<int> _suspensionSectionList = [];
+  final Map<String, int> _suspensionSectionMap = {};
 
   @override
   void initState() {
@@ -124,15 +124,15 @@ class _SuspensionWidgetState extends State<SuspensionView> {
       _suspensionSectionMap[widget.header!.tag] = 0;
       offset = widget.header!.height;
     }
-    widget.data.forEach((v) {
+    for (var v in widget.data) {
       if (tag != v.tag) {
         tag = v.tag;
-        _suspensionSectionMap.putIfAbsent(tag!, () => offset);
+        _suspensionSectionMap.putIfAbsent(tag, () => offset);
         offset = offset + widget.suspensionHeight + widget.itemHeight;
       } else {
         offset = offset + widget.itemHeight;
       }
-    });
+    }
     _suspensionSectionList
       ..clear()
       ..addAll(_suspensionSectionMap.values);
@@ -149,13 +149,15 @@ class _SuspensionWidgetState extends State<SuspensionView> {
       widget.contentWidget,
     ];
 
-    children.add(Positioned(
-      ///-0.1修复部分手机丢失精度问题
-      top: _suspensionTop.toDouble() - 0.1,
-      left: 0.0,
-      right: 0.0,
-      child: widget.suspensionWidget,
-    ));
+    children.add(
+      Positioned(
+        /// -0.1修复部分手机丢失精度问题
+        top: _suspensionTop.toDouble() - 0.1,
+        left: 0.0,
+        right: 0.0,
+        child: widget.suspensionWidget,
+      )
+    );
 
     return Stack(children: children);
   }

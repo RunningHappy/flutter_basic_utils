@@ -3,7 +3,6 @@ import 'package:app_assembly/app_assembly.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lpinyin/lpinyin.dart';
-
 import 'az_common.dart';
 import 'az_listview.dart';
 import 'city_model.dart';
@@ -29,14 +28,15 @@ class SingleSelectCityPage extends StatefulWidget {
   /// 单选项 点击的回调
   final ValueChanged<SelectCityModel>? onValueChanged;
 
-  SingleSelectCityPage({
-    this.appBarTitle = '',
-    this.hotCityTitle = '',
+  const SingleSelectCityPage({
+    Key? key,
+    this.appBarTitle,
+    this.hotCityTitle,
     required this.hotCityList,
     this.cityList,
     this.locationText = '',
     this.onValueChanged,
-  });
+  }) : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -47,20 +47,20 @@ class SingleSelectCityPage extends StatefulWidget {
 class _SingleSelectCityPageState extends State<SingleSelectCityPage> {
   List<SelectCityModel> _cityList = [];
 
-  ///搜索框的高度
-  int _suspensionHeight = 40;
+  /// 搜索框的高度
+  final int _suspensionHeight = 40;
 
   /// 热门的按钮高度
-  int _itemHeight = 50;
+  final int _itemHeight = 50;
 
-  ///当前展示的文案信息
+  /// 当前展示的文案信息
   String _suspensionTag = "";
 
-  ///是否展示城市的stack
-  bool _showCityStack = true;
+  /// 是否展示城市的 stack
+  final bool _showCityStack = true;
 
-  ///搜索的文案
-  String _searchText = "";
+  /// 搜索的文案
+  final String _searchText = "";
 
   @override
   void initState() {
@@ -70,16 +70,13 @@ class _SingleSelectCityPageState extends State<SingleSelectCityPage> {
 
   void _loadData() async {
     if (widget.cityList == null || widget.cityList!.isEmpty) {
-      //加载城市列表
-      rootBundle
-          .loadString(
-          '/assets/china.json')
-          .then((value) {
+      // 加载城市列表
+      rootBundle.loadString('packages/app_assembly/assets/china.json').then((value) {
         Map countyMap = json.decode(value);
         List list = countyMap['china'];
-        list.forEach((value) {
+        for (var value in list) {
           _cityList.add(SelectCityModel(name: value['name']));
-        });
+        }
         _handleList(_cityList);
         setState(() {});
       });
@@ -104,7 +101,7 @@ class _SingleSelectCityPageState extends State<SingleSelectCityPage> {
         list[i].tag = "#";
       }
     }
-    //根据A-Z排序
+    // 根据A-Z排序
     SuspensionUtil.sortListBySuspensionTag(_cityList);
   }
 
@@ -121,17 +118,17 @@ class _SingleSelectCityPageState extends State<SingleSelectCityPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Container(
-          padding: EdgeInsets.only(left: 20, right: 10, top: 20, bottom: 0),
+          padding: const EdgeInsets.only(left: 20, right: 10, top: 20, bottom: 0),
           child: Text(
             widget.hotCityTitle ?? '这里是推荐城市',
             textAlign: TextAlign.left,
-            style: TextStyle(
+            style: const TextStyle(
               fontWeight: FontWeight.w500,
             ),
           ),
         ),
         Container(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 8, bottom: 0),
+          padding: const EdgeInsets.only(left: 20, right: 20, top: 8, bottom: 0),
           child: Wrap(
             alignment: WrapAlignment.start,
             runAlignment: WrapAlignment.start,
@@ -139,20 +136,20 @@ class _SingleSelectCityPageState extends State<SingleSelectCityPage> {
             children: hotCityList.map((e) {
               return OutlinedButton(
                 style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.all(0),
-                  side: BorderSide(color: Color(0xFFF8F8F8), width: .5),
-                  backgroundColor: Color(0xFFF8F8F8),
+                  padding: const EdgeInsets.all(0),
+                  side: const BorderSide(color: Color(0xFFF8F8F8), width: .5),
+                  backgroundColor: const Color(0xFFF8F8F8),
                 ),
                 child: Container(
                   alignment: Alignment.center,
                   height: 36.0,
                   width: width,
-                  padding: EdgeInsets.all(0),
-                  color: Color(0xFFF8F8F8),
+                  padding: const EdgeInsets.all(0),
+                  color: const Color(0xFFF8F8F8),
                   child: Text(
                     e.name,
                     textAlign: TextAlign.center,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF222222),
                       fontSize: 12,
                       fontWeight: FontWeight.w400,
@@ -178,12 +175,12 @@ class _SingleSelectCityPageState extends State<SingleSelectCityPage> {
     return Container(
       height: _suspensionHeight.toDouble(),
       padding: const EdgeInsets.only(left: 15.0),
-      color: Color(0xfff3f4f5),
+      color: const Color(0xfff3f4f5),
       alignment: Alignment.centerLeft,
       child: Text(
         '$susTag',
         softWrap: false,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 14.0,
           color: Color(0xff999999),
         ),
@@ -216,46 +213,47 @@ class _SingleSelectCityPageState extends State<SingleSelectCityPage> {
     );
   }
 
-  ///定位当前 城市
+  /// 定位当前 城市
   Widget _buildLocationBar(String locationText) {
     return Container(
-        padding: EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 10),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Icon(
-              Icons.place,
-              size: 20.0,
-            ),
-            Text(locationText),
-          ],
-        ));
+      padding: const EdgeInsets.only(left: 20, right: 10, top: 10, bottom: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const Icon(
+            Icons.place,
+            size: 20.0,
+          ),
+          Text(locationText),
+        ],
+      )
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: getAppBar(context,title: widget.appBarTitle ?? '城市选择'),
-        body: Container(
-          decoration: BoxDecoration(color: Colors.white),
-          child: Column(
-            children: <Widget>[
-              widget.locationText.isEmpty
-                  ? Container()
-                  : _buildLocationBar(widget.locationText),
-              Divider(
-                height: .0,
-              ),
-              _showCityStack
-                  ? _buildCityList()
-                  : _buildSearchResultList(_searchText),
-            ],
-          ),
-        ));
+      resizeToAvoidBottomInset: false,
+      appBar: getAppBar(context, title: widget.appBarTitle ?? '城市选择', onTap: () {
+          Navigator.pop(context);
+        }, backgroundColor: ThemeData().primaryColor, color: Colors.white
+      ),
+      body: Container(
+        decoration: const BoxDecoration(color: Colors.white),
+        child: Column(
+          children: <Widget>[
+            widget.locationText.isEmpty ? Container() : _buildLocationBar(widget.locationText),
+            const Divider(
+              height: .0,
+            ),
+            _showCityStack ? _buildCityList() : _buildSearchResultList(_searchText),
+          ],
+        ),
+      )
+    );
   }
 
-  ///展示城市列表
+  /// 展示城市列表
   Widget _buildCityList() {
     int num = widget.hotCityList.length ~/ 3;
     int rem = widget.hotCityList.length % 3;
@@ -270,43 +268,47 @@ class _SingleSelectCityPageState extends State<SingleSelectCityPage> {
       }
     }
     return Expanded(
-        flex: 1,
-        child: AzListView(
-          data: _cityList,
-          itemBuilder: (context, model) =>
-              _buildListItem(model as SelectCityModel),
-          suspensionWidget: _buildSusWidget(_suspensionTag),
-          isUseRealIndex: true,
-          itemHeight: _itemHeight,
-          suspensionHeight: _suspensionHeight,
-          onSusTagChanged: _onSusTagChanged,
-          header: AzListViewHeader(
-              tag: "#",
-              height: headerHeight,
-              builder: (context) {
-                return _buildHeader();
-              }),
-          indexHintBuilder: (context, hint) {
-            return Container(
-              alignment: Alignment.center,
-              width: 40.0,
-              height: 40.0,
-              decoration: BoxDecoration(
-                  color: Color(0x22222222),
-                  borderRadius: BorderRadius.circular(5.0)),
-              child: Text(hint,
-                  style: TextStyle(color: Colors.white, fontSize: 20.0)),
-            );
-          },
-        ));
+      flex: 1,
+      child: AzListView(
+        data: _cityList,
+        itemBuilder: (context, model) => _buildListItem(model as SelectCityModel),
+        suspensionWidget: _buildSusWidget(_suspensionTag),
+        isUseRealIndex: true,
+        itemHeight: _itemHeight,
+        suspensionHeight: _suspensionHeight,
+        onSusTagChanged: _onSusTagChanged,
+        header: AzListViewHeader(
+          tag: "#",
+          height: headerHeight,
+          builder: (context) {
+            return _buildHeader();
+          }
+        ),
+        indexHintBuilder: (context, hint) {
+          return Container(
+            alignment: Alignment.center,
+            width: 40.0,
+            height: 40.0,
+            decoration: BoxDecoration(
+              color: const Color(0x22222222),
+              borderRadius: BorderRadius.circular(5.0)
+            ),
+            child: Text(hint,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 20.0
+              )
+            ),
+          );
+        },
+      )
+    );
   }
 
-  ///城市搜索结果页
+  /// 城市搜索结果页
   Widget _buildSearchResultList(String searchText) {
     List<SelectCityModel> cList = _searchCityList(searchText);
-    return (cList.length == 0)
-        ? _noDataWidget()
-        : Expanded(
+    return (cList.isEmpty) ? _noDataWidget() : Expanded(
       flex: 1,
       child: ListView.builder(
         itemBuilder: (context, index) {
@@ -317,19 +319,22 @@ class _SingleSelectCityPageState extends State<SingleSelectCityPage> {
     );
   }
 
-  ///没有数据的占位图
+  /// 没有数据的占位图
   Widget _noDataWidget() {
-    return EmptyPageFrame(showEmpty: true, title: '', iconPath: '', childWidget: Container(),);
+    return EmptyPageFrame(
+      showEmpty: true,
+      title: '',
+      iconPath: '',
+      childWidget: Container(),
+    );
   }
 
-  ///获取城市搜索结果
+  /// 获取城市搜索结果
   List<SelectCityModel> _searchCityList(String searchText) {
     List<SelectCityModel> cList = [];
     for (int index = 0; index < _cityList.length; index++) {
       SelectCityModel cInfo = _cityList[index];
-      if (cInfo.name.contains(searchText) ||
-          cInfo.tag.contains(searchText) ||
-          cInfo.tag.contains(searchText.toUpperCase())) {
+      if (cInfo.name.contains(searchText) || cInfo.tag.contains(searchText) || cInfo.tag.contains(searchText.toUpperCase())) {
         cList.add(cInfo);
       }
     }

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 abstract class ISuspensionBean {
   bool isShowSuspension = false;
   String name = "";
-  String tag = ""; //Suspension Tag
+  String tag = ""; // Suspension Tag
 }
 
 /// AzListView Header.

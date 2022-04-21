@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -83,6 +85,69 @@ Future<bool> requestPermissions(List<Permission>? permissionList) async {
   return !results.contains(false);
 }
 
+
+///
+/// 格式化数值 - 1000.4万
+///
+String formatNum(int number) {
+  if (number > 10000) {
+    var str = _formatNum(number / 10000, 1);
+    if (str.split('.')[1] == '0') {
+      str = str.split('.')[0];
+    }
+    return str + '万';
+  }
+  return number.toString();
+}
+
+String _formatNum(double number, int position) {
+  if ((number.toString().length - number.toString().lastIndexOf(".") - 1) <
+      position) {
+    // 小数点后有几位小数
+    return (number
+        .toStringAsFixed(position)
+        .substring(0, number.toString().lastIndexOf(".") + position + 1)
+        .toString());
+  } else {
+    return (number
+        .toString()
+        .substring(0, number.toString().lastIndexOf(".") + position + 1)
+        .toString());
+  }
+}
+
+///
+/// 格式化时间 - 今天、昨天、具体日期
+///
+String formatTime(int timeSec) {
+  var date = DateTime.fromMillisecondsSinceEpoch(timeSec * 1000);
+  var now = DateTime.now();
+  var yesterday = DateTime.fromMillisecondsSinceEpoch(
+      now.millisecondsSinceEpoch - 24 * 60 * 60 * 1000);
+
+  if (date.year == now.year && date.month == now.month && date.day == now.day) {
+    return '今天${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+  } else if (date.year == yesterday.year &&
+      date.month == yesterday.month &&
+      date.day == yesterday.day) {
+    return '昨天${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+  }
+  return '${date.year.toString()}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')} ${date.hour.toString().padLeft(2, '0')}:${date.minute.toString().padLeft(2, '0')}';
+}
+
+///
+/// 生成随机串
+///
+dynamic randomBit(int len, {String? type}) {
+  String character = type == 'num'
+      ? '0123456789'
+      : 'qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM';
+  String left = '';
+  for (var i = 0; i < len; i++) {
+    left = left + character[Random().nextInt(character.length)];
+  }
+  return type == 'num' ? int.parse(left) : left;
+}
 
 
 class NumLengthInputFormatter extends TextInputFormatter {
